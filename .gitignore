@@ -1,0 +1,16 @@
+# Ignore virtual environment files
+.python-version
+
+# Ignore database files
+*.sqlite3
+*.pgdump
+
+# Ignore generated files
+__pycache__/
+*.pyc
+
+# Ignore logs
+logs/
+
+# Ignore postgres volume
+postgres-data/
