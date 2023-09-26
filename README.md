@@ -12,7 +12,7 @@ Run the following command:
 $ docker-compose up -d
 ```
 
-The first time you run the app, an error may appear due to the permissions that the folder "postgres-data" may have. To solve this, give all permissions to your current user and run the last command again.
+The first time you run the app, an error may appear due to the permissions that the folder "postgres-data" may have. First try to stop the containers and run them again to fix this, if this does not works, give all permissions to your current user and run the last command again.
 
 This will start the app in a container and expose port 8000 to the host machine. You can then access the app at http://localhost:8000.
 
