@@ -55,3 +55,11 @@ $ docker-compose up -d again.
 ```
 
 If you are still having trouble running the app, please create a new issue on the GitHub repository.
+
+Add changes
+
+When you add a change in the code to apply this to the docker, will need to run the follow command when run the conatiner.
+
+```
+$ docker-compose up --build
+```
