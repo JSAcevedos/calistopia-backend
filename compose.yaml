@@ -4,6 +4,7 @@ services:
 
   db:
     image: postgres:15.4-alpine
+    container_name: db
     environment:
       - POSTGRES_DB=calistopia
       - POSTGRES_USER=calistopia
@@ -12,7 +13,9 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     ports:
       - '8001:5432'
+
   web:
+    container_name: web
     build: .
     command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
     volumes:
@@ -21,3 +24,4 @@ services:
       - "8000:8000"
     depends_on:
       - db
+

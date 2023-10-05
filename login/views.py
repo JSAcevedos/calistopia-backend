@@ -6,9 +6,6 @@ from django.contrib.auth.hashers import make_password
 
 def login(request):
     return render(request, 'index.html')
-        # user = User(username = request.POST['username'],password = request.POST['password'], email = request.POST['email'])
-        # user.password = make_password(user.password, salt=None, hasher='default')
-        # user.save()
     
 def signup(request):
     if request.POST['password'] == request.POST['confirm-password']:
