@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib import auth
 from django.contrib import messages
+from django.http import HttpResponseNotFound, HttpResponse
 
 # Create your views here.
 
@@ -39,22 +40,19 @@ def logout(request):
     return redirect("/")
 
 def signup(request):
-    if request.POST['password'] == request.POST['confirm-password']:
-        user = User(username=request.POST['username'], password=request.POST['password'], email=request.POST['email'])
-        user.password = make_password(user.password, salt=None, hasher='default')
-        user = User.objects.filter(request.POST['username'])
-        return render(request, 'index.html')
+
+# Register User
+
+    if request.method == 'GET':
+        return HttpResponseNotFound("<h1>Not Found<h1>")
     else:
-        print('User does not exist')
-        return render(request, 'index.html')
-
-
-def main(request):
-    try:
-        userName = request.POST["username"]
-        if not User.objects.filter(username=userName).exists():
-            userName = User.objects.get(email = userName).username
-    except MultiValueDictKeyError:
-        userName = False
-    context = {"username": userName}
-    return render(request, 'main.html')
+        try:
+            if request.POST['password'] == request.POST['confirm-password']:
+                user = User(username = request.POST['username'],password = request.POST['password'], email = request.POST['email'])
+                user.password = make_password(user.password, salt=None, hasher='default')
+                user.save()
+                return HttpResponse('User created')
+            else:
+                return HttpResponse('Password does not match')
+        except:
+            return HttpResponse('The user already exist')
