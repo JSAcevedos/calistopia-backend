@@ -32,11 +32,11 @@
             <!--Formulario de login y registro-->
             <div class="contenedor__login-register">
                 <!--Login-->
-                <form action="login" method ="POST" class="formulario__login">
+                <form action="" method ="POST" class="formulario__login">
                     {% csrf_token %}
                     <h2>Iniciar Sesión</h2>
                     <input name = "username" type="text" placeholder="Usuario">
-                    <input name = "password" type="password" placeholder="Contraseña">
+                    <input name = "password" type="password" placeholder="Contraseña" required>
                     <button>Entrar</button>
                     <style> h5 {color:red;}</style>
                     {% for message in messages %}
@@ -44,7 +44,7 @@
                     {% endfor %}
                 </form>
                 <!--Registro-->
-                <form action="signup" method="POST" class="formulario__register">
+                <form action="signup/" method="POST" class="formulario__register">
                     {% csrf_token %}
                     <h2>Registrarse</h2>
                     <input name="email" type="text" placeholder="Correo Electronico" required>
