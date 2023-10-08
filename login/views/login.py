@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from ..models import User
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib import auth
 from django.contrib import messages
@@ -10,31 +10,30 @@ from django.contrib import messages
 def login(request):
     try:
         userName = request.POST['username']
-        userPassword = make_password(request.POST['password'], salt=None, hasher='default')
+        userPassword = request.POST['password']
 
         if User.objects.filter(username = userName).exists():
             password = User.objects.get(username = userName).password
-            if password == userPassword:
+            if check_password(userPassword, password):
                 return redirect("main")
             else:
-                messages.info(request, "La contraseña ingresada no es correcta.")
-                return redirect("login")
+                messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
+                return redirect("index")
         elif User.objects.filter(email = userName).exists():
             password = User.objects.get(email=userName).password
-            if password == userPassword:
+            if check_password(userPassword, password):
                 return redirect("main")
             else:
-                messages.info(request, "La contraseña ingresada no es correcta.")
-                return redirect("login")
+                messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
+                return redirect("index")
         else:
             messages.info(request, "El nombre de usuario o correo electrónico no se encuentra registrado.")
-            return redirect("login")
+            return redirect("index")
     except MultiValueDictKeyError:
         userName = False
         userPassword = False
     return render(request, 'index.html')
 
 def logout(request):
-    auth.logout(request)
-    return redirect("/")
+    return redirect("index")
 
