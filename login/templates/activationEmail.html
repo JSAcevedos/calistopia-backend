@@ -1,0 +1,5 @@
+{% autoescape off %}  
+Hola {{ user }},  
+Para activar tu cuenta accede al siguiente enlace,  
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}  
+{% endautoescape %}  

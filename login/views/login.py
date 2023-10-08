@@ -11,6 +11,7 @@ def login(request):
     try:
         userName = request.POST['username']
         userPassword = make_password(request.POST['password'], salt=None, hasher='default')
+        
 
         if User.objects.filter(username = userName).exists():
             password = User.objects.get(username = userName).password
