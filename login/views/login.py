@@ -1,3 +1,4 @@
+import email
 from django.shortcuts import render, redirect
 from ..models import User
 from django.contrib.auth.hashers import make_password, check_password
@@ -15,14 +16,22 @@ def login(request):
         if User.objects.filter(username = userName).exists():
             password = User.objects.get(username = userName).password
             if check_password(userPassword, password):
-                return redirect("main")
+                if User.objects.get(username = userName).active:
+                    return redirect("main")
+                else:
+                    messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
+                    return redirect("index")
             else:
                 messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
         elif User.objects.filter(email = userName).exists():
             password = User.objects.get(email=userName).password
             if check_password(userPassword, password):
-                return redirect("main")
+                if User.objects.get(email = userName).active:
+                    return redirect("main")
+                else:
+                    messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
+                    return redirect("index")
             else:
                 messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
