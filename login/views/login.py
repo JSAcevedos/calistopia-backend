@@ -1,9 +1,7 @@
-import email
 from django.shortcuts import render, redirect
 from ..models import User
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils.datastructures import MultiValueDictKeyError
-from django.contrib import auth
 from django.contrib import messages
 
 # Create your views here.
@@ -21,6 +19,7 @@ def login(request):
                 else:
                     messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                     return redirect("index")
+                return redirect("main")
             else:
                 messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
@@ -32,6 +31,7 @@ def login(request):
                 else:
                     messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                     return redirect("index")
+                return redirect("main")
             else:
                 messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
