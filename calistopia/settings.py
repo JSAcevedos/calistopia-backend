@@ -22,6 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-#2u#qtm3u(*p1n$0-5em86(f9gubruqy@5e71g^e5zia!yelwb'
 
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'calistopia2023@gmail.com'
+EMAIL_HOST_USER = 'calistopia2023@gmail.com'
+EMAIL_HOST_PASSWORD = 'cgdpusdwixnasdih'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -103,6 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'login.User'
 
 
 # Internationalization
