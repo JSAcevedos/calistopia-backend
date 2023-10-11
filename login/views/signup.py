@@ -33,18 +33,16 @@ def signup(request):
                 messages.success(request, '¡Cuenta creada! ¡Porfavor revisa tu correo para activar tu cuenta de Calistopia!')
                 return redirect("index")
             else:
-                return render(
-                    request, "index.html", {"error": "La contraseña no coincide"}
-                )
-
+                messages.success(request, 'Las contraseñas no coincide')
+                return redirect("index")
         except IntegrityError:
-            return render(request, "index.html", {"error": "El usuario ya existe"})
+            messages.success(request, 'El usuario ya existe')
+            return redirect("index")
 
         except SMTPRecipientsRefused:
             user.delete()
-            return render(
-                request, "index.html", {"error": "El correo electrónico no es valido"}
-            )
+            messages.success(request, 'El correo electrónico no es valido')
+            return redirect("index")
 
 
 # Send activation email

@@ -19,7 +19,6 @@ def login(request):
                 else:
                     messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                     return redirect("index")
-                return redirect("main")
             else:
                 messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
@@ -31,7 +30,6 @@ def login(request):
                 else:
                     messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                     return redirect("index")
-                return redirect("main")
             else:
                 messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
