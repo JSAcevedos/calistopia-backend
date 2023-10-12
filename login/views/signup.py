@@ -1,17 +1,17 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth.hashers import make_password
-from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.hashers import make_password
+from django.template.loader import render_to_string
 from ..tokens import account_activation_token
-from django.db import IntegrityError
-from smtplib import SMTPRecipientsRefused
-from ..models import User
-from django.core.mail import EmailMessage
 from django.http import HttpResponseNotFound
+from smtplib import SMTPRecipientsRefused
+from django.core.mail import EmailMessage
+from django.shortcuts import redirect
+from django.db import IntegrityError
 from django.http import HttpResponse
+from django.contrib import messages
+from ..models import User
 
 
 def signup(request):
@@ -30,7 +30,7 @@ def signup(request):
                 )
                 user.save()
                 activateEmail(request, user, user.email)
-                messages.success(request, '¡Cuenta creada! ¡Porfavor revisa tu correo para activar tu cuenta de Calistopia!')
+                messages.success(request, '¡Cuenta creada! ¡Porfavor revisa tu correo para activar tu cuenta de Calistopia!') 
                 return redirect("index")
             else:
                 messages.success(request, 'Las contraseñas no coincide')
@@ -49,7 +49,7 @@ def signup(request):
 
 
 def activateEmail(request, user, to_email):
-    mail_subject = "Activate your user account."
+    mail_subject = "Activa tu cuenta de Calistopia"
     message = render_to_string(
         "activationEmail.html",
         {

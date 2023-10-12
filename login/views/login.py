@@ -20,7 +20,7 @@ def login(request):
                     messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                     return redirect("index")
             else:
-                messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
+                messages.error(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
         elif User.objects.filter(email = userName).exists():
             password = User.objects.get(email=userName).password
@@ -31,10 +31,10 @@ def login(request):
                     messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                     return redirect("index")
             else:
-                messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
+                messages.error(request, f"La contraseña ingresada no es correcta para {userName}.")
                 return redirect("index")
         else:
-            messages.info(request, "El nombre de usuario o correo electrónico no se encuentra registrado.")
+            messages.error(request, "El nombre de usuario o correo electrónico no se encuentra registrado.")
             return redirect("index")
     except MultiValueDictKeyError:
         userName = False
