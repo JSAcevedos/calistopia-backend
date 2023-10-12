@@ -42,7 +42,7 @@ def login(request):
                     messages.info(request, f"Qeuedan {10 - userTodayLoginAttempts} intentos.")
                     return redirect("index")
             else:
-                    messages.info(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
+                    messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
                     return redirect("index")
         elif User.objects.filter(email = userName).exists():
             userTodayLoginAttempts = User.objects.get(email=userName).todayLoginAttempts
@@ -72,10 +72,10 @@ def login(request):
                     messages.info(request, f"Qeuedan {10 - userTodayLoginAttempts} intentos.")
                     return redirect("index")
             else:
-                messages.info(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
+                messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
                 return redirect("index")
         else:
-            messages.info(request, "El nombre de usuario o correo electrónico no se encuentra registrado.")
+            messages.error(request, "El nombre de usuario o correo electrónico no se encuentra registrado.")
             return redirect("index")
     except MultiValueDictKeyError:
         userName = False

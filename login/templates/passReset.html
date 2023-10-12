@@ -1,0 +1,5 @@
+{% autoescape off %}  
+Hola {{ user }},  
+Para restablecer tu contraseña ingresa al siguiente enlace,  
+http://{{ domain }}{% url 'reset' uidb64=uid token=token %}  
+{% endautoescape %}  
