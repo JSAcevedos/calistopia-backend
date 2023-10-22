@@ -1,15 +1,17 @@
-from django.shortcuts import render, redirect
-from ..models import User
-from django.contrib.auth.hashers import make_password, check_password
 from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import login as cookie, logout as remove_cookie
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
+from ..models import User
 import datetime
 
 
 # Create your views here.
 
 def login(request):
+    remove_cookie(request)
     try:
         userName = request.POST['username']
         userPassword = request.POST['password']
@@ -29,6 +31,7 @@ def login(request):
                         user = User.objects.get(username=userName)
                         user.todayLoginAttempts = 0
                         user.save()
+                        cookie(request, user)
                         return redirect("main")
                     else:
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
@@ -83,5 +86,6 @@ def login(request):
     return render(request, 'index.html')
 
 def logout(request):
+    remove_cookie(request)
     return redirect("index")
 
