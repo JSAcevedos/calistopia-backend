@@ -1,5 +1,6 @@
 # Ignore virtual environment files
 .python-version
+.env
 
 # Ignore database files
 *.sqlite3

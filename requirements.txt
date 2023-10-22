@@ -4,3 +4,4 @@ sqlparse==0.4.4
 typing_extensions==4.7.1
 psycopg2-binary>=2.8
 six
+python-decouple==3.8
