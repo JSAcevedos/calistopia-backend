@@ -41,6 +41,7 @@ PASSWORD_RESET_TIMEOUT = config('PASSWORD_RESET_TIMEOUT', cast=int)
 DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv())
 
 
 # Application definition
@@ -66,8 +67,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv())
 
 ROOT_URLCONF = 'calistopia.urls'
 
@@ -149,4 +148,3 @@ LOGIN_URL = '/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
