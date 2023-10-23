@@ -66,6 +66,8 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
 ]
 
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv())
+
 ROOT_URLCONF = 'calistopia.urls'
 
 TEMPLATES = [
