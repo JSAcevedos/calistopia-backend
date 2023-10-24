@@ -20,15 +20,11 @@ def signup(request):
     else:
         try:
             if request.POST["password"] == request.POST["confirm-password"]:
-                user = User(
-                    username=request.POST["username"],
-                    password=request.POST["password"],
-                    email=request.POST["email"],
+                user = User.objects.create_user(
+                    request.POST["username"], 
+                    request.POST["password"], 
+                    request.POST["email"]
                 )
-                user.password = make_password(
-                    user.password, salt=None, hasher="default"
-                )
-                user.save()
                 activateEmail(request, user, user.email)
                 messages.success(request, '¡Cuenta creada! ¡Porfavor revisa tu correo para activar tu cuenta de Calistopia!') 
                 return redirect("index")
