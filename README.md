@@ -58,7 +58,7 @@ If you are still having trouble running the app, please create a new issue on th
 
 Add changes
 
-When you add a change in the code to apply this to the docker, will need to run the follow command when run the conatiner.
+If you'd like to add a dependency, you can add it in the requirements.txt file and run the following changes to apply changes.
 
 ```
 $ docker-compose up --build
