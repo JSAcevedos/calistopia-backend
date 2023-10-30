@@ -58,7 +58,7 @@ def reset(request, uidb64, token):
                     "La contraseña ha sido actualizada con exito, ya puedes ingresar a tu cuenta",
                 )
             
-                return redirect("index")
+                return redirect("login")
             else:
                 messages.error(
                     request,
@@ -79,7 +79,7 @@ def reset(request, uidb64, token):
 def sendEmail(request, user, to_email):
     mail_subject = "Restablece tu contraseña de Calistopia"
     message = render_to_string(
-        "passReset.html",
+        "pass_reset.html",
         {
             "user": user.username,
             "domain": get_current_site(request).domain,
