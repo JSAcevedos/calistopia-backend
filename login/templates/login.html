@@ -5,11 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calistopía Login_Register </title>
-    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <title>Calistopía</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
     <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
 </head>
@@ -43,9 +44,21 @@
                     <button>Entrar</button>
                     {% if messages %}
                         {% for message in messages %}
-                        <h5 class="text{{message.tags}}" >{{ message }}</h5>
+                            <div class="alerta {{ message.tags }}">
+                                <div class="icono-alerta">
+                                    <span class="material-symbols-outlined">
+                                        info
+                                    </span>
+                                </div>
+                                <div class="texto-alerta">
+                        
+                                
+                                    <h5>{{ message }}</h5>
+
+                                </div>
+                            </div>
                         {% endfor %}
-                    {% endif %}
+                    {% endif %}
                 </form>
                 <!--Registro-->
                 <form action="/signup/" method="POST" class="formulario__register">
@@ -56,6 +69,23 @@
                     <input name="password" type="password" placeholder="Contraseña" minlength="8" required>
                     <input name="confirm-password" type="password" placeholder="Confirma la contraseña" required>
                     <button>Registrarse</button>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alerta {{ message.tags }}">
+                                <div class="icono-alerta">
+                                    <span class="material-symbols-outlined">
+                                        info
+                                    </span>
+                                </div>
+                                <div class="texto-alerta">
+                        
+                                
+                                    <h5>{{ message }}</h5>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </form>
             </div>
         </div>

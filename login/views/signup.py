@@ -1,7 +1,6 @@
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
-from django.contrib.auth.hashers import make_password
 from django.template.loader import render_to_string
 from ..tokens import account_activation_token
 from django.http import HttpResponseNotFound
@@ -27,18 +26,18 @@ def signup(request):
                 )
                 activateEmail(request, user, user.email)
                 messages.success(request, '¡Cuenta creada! ¡Porfavor revisa tu correo para activar tu cuenta de Calistopia!') 
-                return redirect("index")
+                return redirect("login")
             else:
-                messages.success(request, 'Las contraseñas no coincide')
-                return redirect("index")
+                messages.error(request, 'Las contraseñas no coincide')
+                return redirect("login")
         except IntegrityError:
-            messages.success(request, 'El usuario ya existe')
-            return redirect("index")
+            messages.error(request, 'El usuario ya existe')
+            return redirect("login")
 
         except SMTPRecipientsRefused:
             user.delete()
-            messages.success(request, 'El correo electrónico no es valido')
-            return redirect("index")
+            messages.error(request, 'El correo electrónico no es valido')
+            return redirect("login")
 
 
 # Send activation email
@@ -47,7 +46,7 @@ def signup(request):
 def activateEmail(request, user, to_email):
     mail_subject = "Activa tu cuenta de Calistopia"
     message = render_to_string(
-        "activationEmail.html",
+        "activation_email.html",
         {
             "user": user.username,
             "domain": get_current_site(request).domain,

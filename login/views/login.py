@@ -31,11 +31,15 @@ def login(request):
                         user = User.objects.get(username=userName)
                         user.todayLoginAttempts = 0
                         user.save()
+                        logged = True
                         cookie(request, user)
-                        return redirect("main")
+                        return render(request, 'main.html', {
+                            'logged' : logged,
+                            'username' : request.user
+                        })
                     else:
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
-                        return redirect("index")
+                        return redirect("login")
                 else:
                     user = User.objects.get(username=userName)
                     user.todayLoginAttempts = userTodayLoginAttempts + 1
@@ -43,10 +47,10 @@ def login(request):
                     userTodayLoginAttempts = User.objects.get(username=userName).todayLoginAttempts
                     messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                     messages.info(request, f"Qeuedan {10 - userTodayLoginAttempts} intentos.")
-                    return redirect("index")
+                    return redirect("login")
             else:
                     messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
-                    return redirect("index")
+                    return redirect("login")
         elif User.objects.filter(email = userName).exists():
             userTodayLoginAttempts = User.objects.get(email=userName).todayLoginAttempts
 
@@ -62,10 +66,15 @@ def login(request):
                         user = User.objects.get(email=userName)
                         user.todayLoginAttempts = 0
                         user.save()
-                        return redirect("main")
+                        logged = True
+                        cookie(request, user)
+                        return render(request, 'main.html', {
+                            'logged' : logged,
+                            'username' : request.user
+                        })
                     else:
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
-                        return redirect("index")
+                        return redirect("login")
                 else:
                     user = User.objects.get(username=userName)
                     user.todayLoginAttempts = userTodayLoginAttempts + 1
@@ -73,19 +82,19 @@ def login(request):
                     userTodayLoginAttempts = User.objects.get(email=userName).todayLoginAttempts
                     messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                     messages.info(request, f"Qeuedan {10 - userTodayLoginAttempts} intentos.")
-                    return redirect("index")
+                    return redirect("login")
             else:
                 messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
-                return redirect("index")
+                return redirect("login")
         else:
             messages.error(request, "El nombre de usuario o correo electrónico no se encuentra registrado.")
-            return redirect("index")
+            return redirect("login")
     except MultiValueDictKeyError:
         userName = False
         userPassword = False
-    return render(request, 'index.html')
+    return render(request, 'login.html')
 
 def logout(request):
     remove_cookie(request)
-    return redirect("index")
+    return redirect("main")
 

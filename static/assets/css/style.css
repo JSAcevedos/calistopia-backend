@@ -130,6 +130,11 @@ main{
     outline: none;
 }
 
+.forgot-link {
+    display: block;
+    margin-top: 30px;
+}
+
 /**PARA CAMBIAR DE UN FORMULARIO A OTRO**/
 .formulario__login{
     opacity: 1;
@@ -269,20 +274,23 @@ main{
 	--background-color: #e35d5f;
 }
 
+.textinfo {
+    color: #c9a100;
+}
+
+.textsuccess{
+    color: #46b63e;
+}
+
 .texterror {
     color: #e35d5f;
 }
 
-.textsuccess {
-    color: #46b63e;
-}
 
-.textinfo {
-    color: #c7ac00;
-}
 
-.forgot-link {
-    display: block;
-    padding-top: 25px;
-}
+
+
+
+
+
 
