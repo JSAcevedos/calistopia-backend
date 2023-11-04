@@ -27,8 +27,8 @@
                 <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
             </a>
 
-            {% if logged %}
-            Hola {{ username }}
+            {% if user.is_authenticated %}
+            Hola {{ user.username }}
             <a class="enlaceIngresar" href="/logout/">
                 <p>Salir</p>
             </a>
