@@ -2,6 +2,7 @@
 .python-version
 .env
 .vscode
+.idea
 
 # Ignore database files
 *.sqlite3

@@ -11,6 +11,8 @@ import datetime
 # Create your views here.
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect("login")
     remove_cookie(request)
     try:
         userName = request.POST['username']
@@ -96,5 +98,5 @@ def login(request):
 
 def logout(request):
     remove_cookie(request)
-    return redirect("main")
+    return redirect("login")
 
