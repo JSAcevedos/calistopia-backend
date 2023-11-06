@@ -1,0 +1,5 @@
+{% autoescape off %}
+Hola {{ user }},
+Para confirmar tu correo accede al siguiente enlace,
+http://{{ domain }}/confirm/{{uid}}/{{token}}/{{email}}
+{% endautoescape %}
