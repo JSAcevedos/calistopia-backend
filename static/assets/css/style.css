@@ -264,6 +264,11 @@ main{
 	color: var(--foreground-color);
 }
 
+.info {
+    --foreground-color: #ffffff;
+    --background-color: #c9a100;
+}
+
 .success {
 	--foreground-color: #ffffff;
 	--background-color: #46b63e;

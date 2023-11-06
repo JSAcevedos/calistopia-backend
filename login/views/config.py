@@ -1,25 +1,23 @@
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib.auth.decorators import login_required
+from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.hashers import check_password
+from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
+from ..tokens import account_activation_token
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.contrib import messages
 from ..models import User
-from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
-from django.core.mail import EmailMessage
-from ..tokens import account_activation_token
-from django.http import HttpResponse
 
+@login_required
 def config(request):
-    if not request.user.is_authenticated:
-        return redirect("login")
     return render(request, "config.html")
 
+@login_required
 def change_config(request, id):
     try:
-        if not request.user.is_authenticated:
-            return redirect("login")
         if id == "password":
             context = {"id": "Nueva contraseña", "pass": True}
             password = request.POST["data"]
