@@ -11,4 +11,5 @@ urlpatterns = [
     path('reset/<uidb64>/<token>', views.reset, name='reset'),
     path("config/", views.config, name = "config"),
     path("config/<str:id>/", views.change_config, name = "change"),
+    path('confirm/<uidb64>/<token>/<str:email>', views.email_confirmated, name='confirmated')
 ]

@@ -1,18 +1,25 @@
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth import login as cookie, logout as remove_cookie
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.utils import timezone
 from ..models import User
-from .login import logout
-import datetime
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
+from ..tokens import account_activation_token
+from django.http import HttpResponse
 
 def config(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
     return render(request, "config.html")
 
 def change_config(request, id):
     try:
+        if not request.user.is_authenticated:
+            return redirect("login")
         if id == "password":
             context = {"id": "Nueva contraseña", "pass": True}
             password = request.POST["data"]
@@ -56,14 +63,44 @@ def change_config(request, id):
             user_password = user.password
 
             if check_password(current_password, user_password):
-                messages.info(request, f"No implementado aún.")
+                confirm_email(request, user, new_email)
+                return redirect("main")
             else:
                 messages.info(request, f"La contraseña actual no es correcta.")
-
-        elif id == "login":
-            return redirect("login")
         else:
             return redirect("logout")
     except MultiValueDictKeyError:
         pass
     return render(request, "changes.html", context = context)
+
+def confirm_email(request, user, to_email):
+        mail_subject = "Confirma tu correo en calistopia"
+        message = render_to_string(
+            "confirm_email.html",
+            {
+                "user": user.username,
+                "domain": request.get_host,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": account_activation_token.make_token(user),
+                "email": to_email,
+                "protocol": "https" if request.is_secure() else "http",
+            },
+        )
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.send()
+
+def email_confirmated(request, uidb64, token, email):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(id=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.email = email
+        user.save()
+        messages.info(request, f"El correo ha sido cambiado exitosamente.")
+        return redirect("logout")
+    else:
+        return HttpResponse(
+            "¡Link invalido!"
+        )

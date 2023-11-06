@@ -78,7 +78,7 @@ def activate(request, uidb64, token):
         if not user.active:
             user.delete()
             return HttpResponse(
-            "Link invalido, por favor resgistrate nuevamente para obtener un nuevo link."
+            "Link invalido, por favor registrate nuevamente para obtener un nuevo link."
             )
         return HttpResponse(
             "¡Link invalido!"
