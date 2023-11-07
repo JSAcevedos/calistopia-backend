@@ -12,8 +12,10 @@ import datetime
 
 def login(request):
     if request.user.is_authenticated:
-        return redirect("login")
+        return redirect("main")
+
     remove_cookie(request)
+
     try:
         userName = request.POST['username']
         userPassword = request.POST['password']
@@ -35,10 +37,7 @@ def login(request):
                         user.save()
                         logged = True
                         cookie(request, user)
-                        return render(request, 'main.html', {
-                            'logged' : logged,
-                            'username' : request.user
-                        })
+                        return redirect("main")
                     else:
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                         return redirect("login")
@@ -70,10 +69,7 @@ def login(request):
                         user.save()
                         logged = True
                         cookie(request, user)
-                        return render(request, 'main.html', {
-                            'logged' : logged,
-                            'username' : request.user
-                        })
+                        return redirect("main")
                     else:
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                         return redirect("login")
@@ -83,7 +79,7 @@ def login(request):
                     user.save()
                     userTodayLoginAttempts = User.objects.get(email=userName).todayLoginAttempts
                     messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
-                    messages.info(request, f"Qeuedan {10 - userTodayLoginAttempts} intentos.")
+                    messages.info(request, f"Quedan {10 - userTodayLoginAttempts} intentos.")
                     return redirect("login")
             else:
                 messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")

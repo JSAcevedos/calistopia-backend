@@ -11,23 +11,30 @@ from django.core.mail import EmailMessage
 from ..tokens import account_activation_token
 from django.http import HttpResponse
 
+def user_view(request):
+    if not request.user.is_authenticated:
+        return redirect("land_page")
+    return render(request, "vistaUser.html")
+
 def config(request):
     if not request.user.is_authenticated:
-        return redirect("login")
-    return render(request, "config.html")
+        return redirect("land_page")
+    return render(request, "dataModify.html")
 
 def change_config(request, id):
     try:
         if not request.user.is_authenticated:
-            return redirect("login")
+            return redirect("land_page")
         if id == "password":
-            context = {"id": "Nueva contraseña", "pass": True}
+            context = {"id": "Nueva contraseña", "pass": True, "dato":"*********"}
             password = request.POST["data"]
             confirm_password = request.POST["confirm_password"]
             current_password = request.POST["curr_password"]
 
             user = User.objects.get(username = request.user.username)
             user_password = user.password
+
+
 
             if check_password(current_password, user_password):
                 if password == confirm_password:
@@ -40,7 +47,7 @@ def change_config(request, id):
             else:
                 messages.info(request, f"La contraseña actual no es correcta.")
         elif id == "username":
-            context = {"id": "Nuevo nombre de Usuario", "pass": False}
+            context = {"id": "Nuevo nombre de usuario", "pass": False, "dato": "Usuario"}
             new_username = request.POST["data"]
             current_password = request.POST["curr_password"]
 
@@ -55,7 +62,7 @@ def change_config(request, id):
             else:
                 messages.info(request, f"La contraseña actual no es correcta.")
         elif id == "email":
-            context =  {"id": "Nuevo correo electrónico", "pass": False}
+            context =  {"id": "Nuevo correo electrónico", "pass": False, "dato" : "Correo electrónico"}
             new_email = request.POST["data"]
             current_password = request.POST["curr_password"]
 
@@ -76,7 +83,7 @@ def change_config(request, id):
 def confirm_email(request, user, to_email):
         mail_subject = "Confirma tu correo en calistopia"
         message = render_to_string(
-            "confirm_email.html",
+            "email_templates/confirm_email.html",
             {
                 "user": user.username,
                 "domain": request.get_host,

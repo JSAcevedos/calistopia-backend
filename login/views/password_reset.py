@@ -16,7 +16,7 @@ from ..models import User
 
 def password_reset(request):
     if request.method == "GET":
-        return render(request, "recover_page.html")
+        return render(request, "email_templates/recover_page.html")
     else:
         try:
             user = (

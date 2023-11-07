@@ -1,7 +1,7 @@
 :root{
     --fuenteHeading: 'IBM Plex Mono', monospace;
     --primario: rgba(189, 176, 92);
-    --secundario: rgba(220, 199, 130, 0.5);
+    --secundario: rgba(220, 199, 130, 0.9);
     --blanco: #ffffff;
     --negro: #000000;
     --gris: #F2F2F2;

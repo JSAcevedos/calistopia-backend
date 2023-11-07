@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calistopía Configuración </title>
+    <title>Calistopía dataModify </title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
     <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
@@ -20,8 +20,8 @@
 
     <main>
         <div class="contenedor__todo">
-
-
+            
+                
             <!--Formulario de modificación de datos-->
             <div action="" class="contenedor__dataModify" id="blur">
 
@@ -40,49 +40,24 @@
                             }
 
                 </style>
-
-                <form class="formulario__actualizaDatos" method = "POST">
-                    {% csrf_token %}
-                    <h2>Cambio de datos </h2>
-                    <h1>{{id}}</h1>
-                    {% if pass %}
-                        <input name = "data" type="password" placeholder="{{dato}}">
-                        <h1>Confirmación contraseña </h1>
-                        <input type="password" placeholder="*********" name = "confirm_password">
-                    {% else %}
-                        <input name = "data" type="text" placeholder={{dato}}>
-                    {% endif %}
-
-                    <h1>Contraseña actual </h1>
-                    <input type="password" placeholder="*********" name = "curr_password">
-
-                    <button> Guardar cambios </button>
-
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alerta {{ message.tags }}">
-                                <div class="icono-alerta">
-                                    <span class="material-symbols-outlined">
-                                        info
-                                    </span>
-                                </div>
-                                <div class="texto-alerta">
-                                    <h5>{{ message }}</h5>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-
-
-                </form>
-
+              
+                <form class="formulario__actualizaDatos" action = "./username/">
+                    <h2>Datos del usuario </h2>
+                    <h1>Nombre de usuario: {{user.username}} </h1>
+                    <button> Cambiar nombre</button>
+                    <h1>Correo electrónico: {{user.email}}</h1>
+                    <button formaction = "./email/"> Cambiar correo </button>
+                    <h1>Contraseña</h1>
+                    <button formaction="./password/"> Cambiar contraseña </button>
+                </form>  
+                
         </div>
 
     </main>
 
     <script src="{% static '/assets/js/scriptdataModify.js' %}"></script>
-
-
+    
+    
 
 </body>
 </html>
