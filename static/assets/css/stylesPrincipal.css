@@ -272,3 +272,32 @@ img {
     margin: 5% 20rem;
     padding: 2%;
 }
+
+.exercise__related__contanier {
+    display: flex;
+    background-color: var(--primario);
+}
+
+.exercise__related__contanier a:hover{
+    background-color: var(--secundario);
+}
+
+.exercise__related {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    min-width: 300px;
+    max-width: 300px;
+    padding: 7% 13%;
+}
+
+.exercise__related__image {
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.exercise__related__not__found {
+    padding: 3%;
+}
+

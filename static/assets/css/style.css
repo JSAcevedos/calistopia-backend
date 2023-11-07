@@ -130,6 +130,11 @@ main{
     outline: none;
 }
 
+.forgot-link {
+    display: block;
+    padding-top: 20px;
+}
+
 /**PARA CAMBIAR DE UN FORMULARIO A OTRO**/
 .formulario__login{
     opacity: 1;

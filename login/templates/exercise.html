@@ -76,16 +76,32 @@ Dificultad:
         <h1>
             {{ exercise.name }}
         </h1>
+        <h3>
+            Grupo muscular: {{ exercise.group }}
+        </h3>
         <strong>Dificultad: </strong>{{ exercise.level }}
         <p>
             {{ exercise.description }}
         </p>
-        <div class="exercise__related">
-            {% for similar in related %}
+        <h3>Ejercicios similares</h3>
+        <p>En este apartado podras encontrar diferentes ejercicios para el mismo grupo muscular, todos con el mismo nivel de dificultad para variar tu rutina!</p>
+        <div class="exercise__related__contanier">
+            {% if related %}
+                {% for similar in related %}
 
-            {{ similar.name }}
+                    <a href="/exercise/{{ similar.id }}">
+                        <div class="exercise__related">
+                            <strong class="exercise__related__title">{{ similar.name }}</strong>
+                            <img class="exercise__related__image" src="{{ similar.logo }}" alt="imagen ejercicio">
+                        </div>
+                    </a>
 
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+
+                    <strong class="exercise__related__not__found">Aún no tenemos ejercicios relacionados, pero estamos trabajando para traer proximamente, perdona las molestias :D</strong>
+
+            {% endif %}
         </div>
     </div>
 
