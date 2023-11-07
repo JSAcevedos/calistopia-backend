@@ -259,7 +259,16 @@ main{
 	color: var(--foreground-color);
 }
 
+
 .exito-alerta {
+=======
+.info {
+    --foreground-color: #ffffff;
+    --background-color: #c9a100;
+}
+
+.success {
+>>>>>>> aac76bfc22799302082ad36ee8f6597e55c3dfa1
 	--foreground-color: #ffffff;
 	--background-color: #46b63e;
 }
