@@ -290,7 +290,7 @@ main{
 
 .contenedor__dataModify form{
     width: 100%;
-    padding: 80px 20px;
+    padding: 30px 20px;
     background: var(--blanco);
     position: relative;
     border-radius: 20px;
@@ -309,7 +309,7 @@ main{
     text-align: center;
 
     margin-top: 0px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     color: var(--primario);
 }
 
@@ -327,7 +327,7 @@ main{
 
 .contenedor__dataModify form button{
     padding: 15px 40px;
-    margin-top: 20px;
+    margin-top: 0px;
     border: none;
     border-radius: 18px;
     font-size: 16px;

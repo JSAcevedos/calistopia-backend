@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05a154cf-84bb-4ae3-9895-cb9777de173e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/calistopia-backend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calistopia/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/calistopia/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/changes.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/data_modify.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/dataModify.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/paginaPrincipal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/principalIngresado.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/pagina_principal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/vistaUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/vista_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/login/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login/views/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/login/views/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/views/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/login/views/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/views/password_reset.py" beforeDir="false" afterPath="$PROJECT_DIR$/login/views/password_reset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +42,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging User__settings",
+    "git-widget-placeholder": "User__settings",
     "last_opened_file_path": "/home/jh0mpis/IngSoftProyect/calistopia-backend/static/assets/images"
   }
 }]]></component>

@@ -39,7 +39,9 @@
         <nav class="menuLateral__navegacion">
             <a href="../main/" class="navegacion__enlace">Nosotros</a>
             <a href="../main/" class="navegacion__enlace">Contacto</a>
-            <a href="../logout/" class="navegacion__enlace">Cerrar Sesión</a>
+            {% if user.is_authenticated %}
+                <a href="../logout/" class="navegacion__enlace">Cerrar Sesión</a>
+            {% endif %}
         </nav>
 
     </aside>

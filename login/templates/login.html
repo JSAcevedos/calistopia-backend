@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calistopía</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -10,40 +13,7 @@
     <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
     <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
-
-    <style>
-        .highlight {
-          background-color: red;
-        }
-    </style>
-
-    <script>
-        function validateEmail() {
-          var x = document.getElementById("myEmail").value;
-          if (x == "" || x == null || !x.includes("@")) {
-            document.getElementById("myEmail").className = "highlight";
-          } else {
-            document.getElementById("myEmail").className = "";
-          }
-        }
-    </script>
-
-    <script>
-        function validatePass() {
-        var pass1 = document.getElementById("myPass1").value;
-        var pass2 = document.getElementById("myPass2").value;
-        if (pass1 == "" || pass2 == "" || pass1 == null || pass2 == null || pass1 !== pass2) {
-            document.getElementById("myPass1").className = "highlight";
-            document.getElementById("myPass2").className = "highlight";
-        } else {
-            document.getElementById("myPass1").className = "";
-            document.getElementById("myPass2").className = "";
-        }
-        }
-    </script>
-
 </head>
-
 <body>
 
     <main>
@@ -63,12 +33,14 @@
             </div>
             <!--Formulario de login y registro-->
             <div class="contenedor__login-register">
+
                 <!--Login-->
-                <form action="" method = "POST" class="formulario__login">
+                <form action="" method ="POST" class="formulario__login">
                     {% csrf_token %}
                     <h2>Iniciar Sesión</h2>
                     <input name = "username" type="text" placeholder="Usuario">
-                    <input name = "password" type="password" placeholder="Contraseña">
+                    <input name = "password" type="password" placeholder="Contraseña" required>
+                    <a class="forgot-link" href="/password_reset/">¿Olvidaste tu contraseña?</a>
                     <button>Entrar</button>
                     {% if messages %}
                         {% for message in messages %}
@@ -79,20 +51,23 @@
                                     </span>
                                 </div>
                                 <div class="texto-alerta">
+
+
                                     <h5>{{ message }}</h5>
+
                                 </div>
                             </div>
                         {% endfor %}
                     {% endif %}
                 </form>
                 <!--Registro-->
-                <form action="/signup/" method = "POST" class="formulario__register">
+                <form action="/signup/" method="POST" class="formulario__register">
                     {% csrf_token %}
                     <h2>Registrarse</h2>
-                    <input name = "email" type="text" id="myEmail" placeholder="Correo Electronico" onblur="validateEmail()">
-                    <input name = "username" type="text" placeholder="Usuario">
-                    <input name="password" type="password" id="myPass1" placeholder="Contraseña" onblur="validatePass()">
-                    <input name="confirm-password" type="password" id="myPass2" placeholder="Verificar Contraseña" onblur="validatePass()">
+                    <input name="email" type="text" placeholder="Correo Electronico" required>
+                    <input name="username" type="text" placeholder="Usuario" required>
+                    <input name="password" type="password" placeholder="Contraseña" minlength="8" required>
+                    <input name="confirm-password" type="password" placeholder="Confirma la contraseña" required>
                     <button>Registrarse</button>
                     {% if messages %}
                         {% for message in messages %}
@@ -103,7 +78,10 @@
                                     </span>
                                 </div>
                                 <div class="texto-alerta">
+
+
                                     <h5>{{ message }}</h5>
+
                                 </div>
                             </div>
                         {% endfor %}
@@ -113,7 +91,7 @@
         </div>
     </main>
 
-    <script src="{% static '/assets/js/scriptLoginRegister.js'%}"></script>
+    <script src="{% static '/assets/js/script.js' %}"></script>
 
 </body>
 </html>

@@ -16,7 +16,7 @@ from ..models import User
 
 def password_reset(request):
     if request.method == "GET":
-        return render(request, "email_templates/recover_page.html")
+        return render(request, "recover_page.html")
     else:
         try:
             user = (
@@ -79,7 +79,7 @@ def reset(request, uidb64, token):
 def sendEmail(request, user, to_email):
     mail_subject = "Restablece tu contraseña de Calistopia"
     message = render_to_string(
-        "pass_reset.html",
+        "email_templates/pass_reset.html",
         {
             "user": user.username,
             "domain": get_current_site(request).domain,

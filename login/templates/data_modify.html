@@ -4,16 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calistopía Configuración </title>
+    <title>Calistopía dataModify </title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
-    <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
-    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
 
 </head>
 <body>
@@ -41,23 +40,24 @@
 
                 </style>
 
-                <form class="formulario__actualizaDatos" method = "POST">
+                <form class="formulario__actualizaDatos" action = "./username/" method = "POST">
                     {% csrf_token %}
-                    <h2>Cambio de datos </h2>
-                    <h1>{{id}}</h1>
-                    {% if pass %}
-                        <input name = "data" type="password" placeholder="{{dato}}">
-                        <h1>Confirmación contraseña </h1>
-                        <input type="password" placeholder="*********" name = "confirm_password">
-                    {% else %}
-                        <input name = "data" type="text" placeholder={{dato}}>
-                    {% endif %}
+                    <h2>Actualizar datos </h2>
+
+                    <h1>Nombre de usuario </h1>
+                    <input name="new_username" type="text" placeholder={{user.username}}>
+                    <button> Cambiar nombre </button>
+                    <h1>Correo electrónico </h1>
+                    <input name = "new_email" type="email" placeholder={{user.email}}>
+                    <button formaction="./email/"> Cambiar correo </button>
+                    <h1>Contraseña nueva</h1>
+                    <input name = "new_password" type="password" placeholder="*********">
+                    <h1>Confirmación contraseña </h1>
+                    <input name = "confirm_password" type="password" placeholder="*********">
+                    <button formaction = "./password/"> Cambiar contraseña </button>
 
                     <h1>Contraseña actual </h1>
-                    <input type="password" placeholder="*********" name = "curr_password">
-
-                    <button> Guardar cambios </button>
-
+                    <input name = "curr_password" type="password" placeholder="*********" required>
                     {% if messages %}
                         {% for message in messages %}
                             <div class="alerta {{ message.tags }}">
@@ -72,17 +72,12 @@
                             </div>
                         {% endfor %}
                     {% endif %}
-
-
                 </form>
 
         </div>
 
     </main>
 
-    <script src="{% static '/assets/js/scriptdataModify.js' %}"></script>
-
-
-
+    <script src="{% static 'assets/js/scriptdataModify.js' %}"></script>
 </body>
 </html>
