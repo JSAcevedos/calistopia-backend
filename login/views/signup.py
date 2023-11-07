@@ -46,7 +46,7 @@ def signup(request):
 def activateEmail(request, user, to_email):
     mail_subject = "Activa tu cuenta de Calistopia"
     message = render_to_string(
-        "activation_email.html",
+        "email_templates/activation_email.html",
         {
             "user": user.username,
             "domain": get_current_site(request).domain,
@@ -71,15 +71,12 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.active = True
         user.save()
-        return HttpResponse(
-            "Gracias por la confirmación, ya puedes ingresar a tu cuenta!"
-        )
+        messages.success(request, '¡Cuenta activada!')
+        return redirect("login")
     else:
         if not user.active:
             user.delete()
-            return HttpResponse(
-            "Link invalido, por favor registrate nuevamente para obtener un nuevo link."
-            )
-        return HttpResponse(
-            "¡Link invalido!"
-        )
+            messages.error(request, f"Link invalido, por favor registrate nuevamente para obtener un nuevo link.")
+            return redirect("login")
+        messages.error(request, f"Ha ocurrido un error, intenta de nuevo")
+        return redirect("login")

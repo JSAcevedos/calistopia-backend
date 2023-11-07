@@ -205,14 +205,11 @@ img {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
-    margin: auto 25rem;
-    padding-bottom: 5%;
 }
 @media (min-width: 768px) {
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        margin: auto 25rem;
     }
 }
 @media (min-width: 1024px) {
@@ -247,22 +244,11 @@ img {
     line-height: 1.2;
 }
 
-.ejercicio__imagen {
-    min-height: 180px;
-    max-height: 180px;
-    min-width: 100%;
-}
 
 
-/**Exercise page style**/
 
-.exercise{
-    background-color: #FFF;
-    margin: 5rem 20rem;
-    padding: 3%;
-}
 
-.exercise__video{
-    width: 100%;
-    height: 500px;
-}
+
+
+
+
