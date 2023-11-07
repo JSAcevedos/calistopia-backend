@@ -335,6 +335,7 @@ main{
     color: var(--blanco);
     cursor: pointer;
     outline: none;
+    margin: auto 10%;
 }
 
 .info {
