@@ -35,9 +35,9 @@ def login(request):
                         user = User.objects.get(username=userName)
                         user.todayLoginAttempts = 0
                         user.save()
-                        logged = True
                         cookie(request, user)
                         return redirect("main")
+
                     else:
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                         return redirect("login")
@@ -67,7 +67,6 @@ def login(request):
                         user = User.objects.get(email=userName)
                         user.todayLoginAttempts = 0
                         user.save()
-                        logged = True
                         cookie(request, user)
                         return redirect("main")
                     else:

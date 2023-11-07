@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from ..models import Exercise
 
 
 def main(request):
-    return render(request,"pagina_principal.html")
+    catalogue = Exercise.objects.all()
+    return render(request,"main.html", {
+        'catalogue' : catalogue
+    })

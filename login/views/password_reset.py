@@ -1,14 +1,11 @@
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
-from django.contrib.auth.hashers import make_password
 from django.template.loader import render_to_string
 from ..tokens import account_activation_token
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
-from django.http import HttpResponse
 from django.contrib import messages
-from .signup import activateEmail
 from ..models import User
 
 # Create and send reset link to email if user exists
@@ -36,22 +33,16 @@ def password_reset(request):
 
 
 def reset(request, uidb64, token):
-    # try:
     uid = force_str(urlsafe_base64_decode(uidb64))
     user = User.objects.get(id=uid)
 
     if user is not None and account_activation_token.check_token(user, token):
         if request.method == "GET":
-            # new_token = account_activation_token.make_token(user)
             return render(request, "new_passw.html", {"uid": urlsafe_base64_encode(force_bytes(user.pk)), "token": token})
         else:
             if request.POST["new_password"] == request.POST["new_password2"]:
 
-                user.password = request.POST["new_password"]
-
-                user.password = make_password(
-                    user.password, salt=None, hasher="default"
-                )
+                user.set_password(request.POST["new_password"])
                 user.save()
                 messages.success(
                     request,
@@ -70,10 +61,6 @@ def reset(request, uidb64, token):
             request, "Link Invalido, solicita restablecer tu contraseña nuevamente"
         )
         return redirect("password_reset")
-
-
-# except:
-#     pass
 
 
 def sendEmail(request, user, to_email):

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 # Create your models here.
@@ -51,3 +52,29 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+class Exercise(models.Model):
+    
+    MUSCLE_GROUPS = [
+        ("Pierna","LEGS"),
+        ("Brazo","ARMS"),
+        ("Abdomen","ABDOMINALS"),
+        ("Pecho","CHEST"),
+        ("Espalda","BACK"),
+        ("Hombros","SHOULDERS")
+    ]
+
+    id = models.AutoField(primary_key=True, auto_created = True)
+    name = models.CharField(max_length=200, unique=True)
+    description = models.TextField(unique=True)
+    level = models.IntegerField(validators=[
+        MinValueValidator(1),
+        MaxValueValidator(5)
+    ])
+    group = models.CharField(blank=True, choices=MUSCLE_GROUPS)
+    url = models.CharField(blank=True,unique=True)
+    logo = models.CharField(blank=True,unique=True)
+
+    def __str__(self):
+        string = self.name + ' (' + str(self.id) + ')' 
+        return string
