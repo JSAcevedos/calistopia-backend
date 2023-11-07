@@ -32,7 +32,7 @@ def change_config(request, id):
             user_password = user.password
 
             if not len(password):
-                messages.error(request, f"Contraseña no válido.")
+                messages.error(request, f"Contraseña no válida.")
                 return redirect("/user/config/")
 
             if not len(confirm_password):
@@ -82,6 +82,19 @@ def change_config(request, id):
                 confirm_email(request, user, new_email)
                 messages.info(request, f"Por favor, confirma tu correo para guardar el cambio.")
                 return redirect("/user/config/")
+            else:
+                messages.error(request, f"La contraseña actual no es correcta.")
+                return redirect("/user/config/")
+        elif id == "delete":
+            current_password = request.POST["curr_password"]
+
+            user = User.objects.get(username=request.user.username)
+            user_password = user.password
+
+            if check_password(current_password, user_password):
+                user.delete()
+                messages.info(request, f"Usuario eliminado satisfactoriamente.")
+                return redirect("logout")
             else:
                 messages.error(request, f"La contraseña actual no es correcta.")
                 return redirect("/user/config/")
