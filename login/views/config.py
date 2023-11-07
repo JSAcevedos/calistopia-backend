@@ -12,69 +12,89 @@ from django.contrib import messages
 from ..models import User
 
 @login_required
+def user_view(request):
+    return render(request, "vista_user.html")
+
+@login_required
 def config(request):
-    return render(request, "config.html")
+    messages.info(request,"Para efectuar los cambios debes ingresar tu contraseña.")
+    return render(request, "data_modify.html")
 
 @login_required
 def change_config(request, id):
     try:
         if id == "password":
-            context = {"id": "Nueva contraseña", "pass": True}
-            password = request.POST["data"]
+            password = request.POST["new_password"]
             confirm_password = request.POST["confirm_password"]
             current_password = request.POST["curr_password"]
 
             user = User.objects.get(username = request.user.username)
             user_password = user.password
 
+            if not len(password):
+                messages.error(request, f"Contraseña no válido.")
+                return redirect("/user/config/")
+
+            if not len(confirm_password):
+                messages.error(request, f"Por favor confirma tu nueva contraseña.")
+                return redirect("/user/config/")
+
             if check_password(current_password, user_password):
                 if password == confirm_password:
-                    user.password = password
+                    user.set_password(password)
                     user.save()
-                    messages.info(request, f"La contraseña ha sido cambiada.")
+                    messages.success(request, f"La contraseña ha sido cambiada.")
                     return redirect("logout")
                 else:
-                    messages.info(request, f"Las nuevas contraseñas no coinciden.")
+                    messages.error(request, f"Las nuevas contraseñas no coinciden.")
+                    return redirect("/user/config/")
             else:
-                messages.info(request, f"La contraseña actual no es correcta.")
+                messages.error(request, f"La contraseña actual no es correcta.")
+                return redirect("/user/config/")
         elif id == "username":
-            context = {"id": "Nuevo nombre de Usuario", "pass": False}
-            new_username = request.POST["data"]
+            new_username = request.POST["new_username"]
             current_password = request.POST["curr_password"]
 
             user = User.objects.get(username=request.user.username)
             user_password = user.password
 
+            if not len(new_username):
+                messages.error(request, f"Nombre de usuario no válido.")
+                return redirect("/user/config/")
             if  check_password(current_password, user_password):
                 user.username = new_username
                 user.save()
-                messages.info(request, f"El nombre de usuario ha sido modificado.")
+                messages.success(request, f"El nombre de usuario ha sido modificado.")
                 return redirect("logout")
             else:
-                messages.info(request, f"La contraseña actual no es correcta.")
+                messages.error(request, f"La contraseña actual no es correcta.")
+                return redirect("/user/config/")
         elif id == "email":
-            context =  {"id": "Nuevo correo electrónico", "pass": False}
-            new_email = request.POST["data"]
+            new_email = request.POST["new_email"]
             current_password = request.POST["curr_password"]
 
             user = User.objects.get(username=request.user.username)
             user_password = user.password
-
+            if not len(new_email):
+                messages.error(request, f"Correo electrónico no válido.")
+                return redirect("/user/config/")
             if check_password(current_password, user_password):
                 confirm_email(request, user, new_email)
-                return redirect("main")
+                messages.info(request, f"Por favor, confirma tu correo para guardar el cambio.")
+                return redirect("/user/config/")
             else:
-                messages.info(request, f"La contraseña actual no es correcta.")
+                messages.error(request, f"La contraseña actual no es correcta.")
+                return redirect("/user/config/")
         else:
             return redirect("logout")
     except MultiValueDictKeyError:
-        pass
-    return render(request, "changes.html", context = context)
+        messages.info(request, f"Lo sentimos, ha ocurrido un error, intentalo más tarde.")
+        return redirect("/user/config/")
 
 def confirm_email(request, user, to_email):
         mail_subject = "Confirma tu correo en calistopia"
         message = render_to_string(
-            "confirm_email.html",
+            "email_templates/confirm_email.html",
             {
                 "user": user.username,
                 "domain": request.get_host,
@@ -96,7 +116,7 @@ def email_confirmated(request, uidb64, token, email):
     if user is not None and account_activation_token.check_token(user, token):
         user.email = email
         user.save()
-        messages.info(request, f"El correo ha sido cambiado exitosamente.")
+        messages.success(request, f"El correo ha sido cambiado exitosamente.")
         return redirect("logout")
     else:
         return HttpResponse(
