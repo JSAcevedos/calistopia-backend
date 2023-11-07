@@ -261,14 +261,6 @@ main{
 
 
 .exito-alerta {
-=======
-.info {
-    --foreground-color: #ffffff;
-    --background-color: #c9a100;
-}
-
-.success {
->>>>>>> aac76bfc22799302082ad36ee8f6597e55c3dfa1
 	--foreground-color: #ffffff;
 	--background-color: #46b63e;
 }
@@ -307,7 +299,7 @@ main{
 .contenedor__dataModify form h1{
     font-size: 17px;
     text-align: left;
-    
+
     margin-bottom: 0px;
     color: var(--primario);
 }
@@ -315,7 +307,7 @@ main{
 .contenedor__dataModify form h2{
     font-size: 30px;
     text-align: center;
-    
+
     margin-top: 0px;
     margin-bottom: 50px;
     color: var(--primario);
