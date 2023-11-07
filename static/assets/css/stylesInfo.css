@@ -88,6 +88,7 @@ img {
 .header {
     background-color: var(--secundario);
     height: 20rem;
+    align-items: center;
 }
 
 @media (min-width: 768px) {
@@ -147,7 +148,7 @@ img {
 
 .enlaceIngresar {
     color: var(--negro);
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .menuLateral__navegacion {
@@ -200,26 +201,110 @@ img {
     height: 3rem;
 }
 
+.contenedor {
+    background-color: rgb(221,220,209);
+    padding: 20px;
+    margin: 20px auto;
+    border: 1px solid #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    max-width: 1400px;
+    
+    
+}
+
+.contenedor h3 {
+    margin-top: 0; 
+}
+
+.contenedor .grid {
+    margin-top: 10px; 
+    padding: 0px;
+}
+
+.contenedor .ejercicio {
+    margin: 10px; 
+}
+
+
+@media (max-width: 768px) {
+    .contenedor {
+        padding: 10px; 
+        margin: 10px;
+        max-width: 100%; 
+    }
+}
+
+
+.centrado {
+    text-align: center;
+    line-height: 100px; 
+}
+
+.perfil {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.imagen-de-perfil {
+    max-width: 150px; 
+    max-height: 150px; 
+    width: auto; 
+    height: auto; 
+    border: 2px solid rgba(189, 176, 92); 
+    border-radius: 50%; 
+}
+
+.informacion-usuario {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.cuadro-texto {
+    background-color: #ffffff;
+    padding: 5px; 
+    margin: 10px;
+    border: 1px solid #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Estilos para el botón */
+.boton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: #0056b3;
+}
+
+
+
 /*GRID*/
 .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
-    margin: auto 25rem;
-    padding-bottom: 5%;
 }
 @media (min-width: 768px) {
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        margin: auto 25rem;
     }
 }
 @media (min-width: 1024px) {
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        margin: auto 25rem;
+        margin: auto 10rem;
     }
 }
 
@@ -247,28 +332,79 @@ img {
     line-height: 1.2;
 }
 
-.ejercicio__imagen {
-    min-height: 180px;
-    max-height: 180px;
-    min-width: 100%;
+.boton-esquina {
+    position: absolute;
+    top: 35px; 
+    right: 35px; 
+    padding: 8px 8px; 
+    background-color: #b6a71c;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton-esquina:hover {
+    background-color: #7e7404;
+}
+
+@media (max-width: 768px) {
+    .boton-esquina {
+        font-size: 12px; 
+        padding: 3px 6px; 
+        top: 15px; 
+        right: 9px; 
+    }
+}
+
+.boton-esquina2 {
+    position: absolute;
+    top: 520px; 
+    right: 100px; 
+    padding: 5px 10px; 
+    background-color: #069b01;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 
-/**Exercise page style**/
-
-.exercise{
-    background-color: #FFF;
-    margin: 5rem 20rem;
-    padding: 3%;
+.boton-esquina2:hover {
+    background-color: #046922;
 }
 
-.exercise__video{
-    width: 100%;
-    height: 500px;
+@media (max-width: 768px) {
+    .boton-esquina2 {
+        font-size: 12px; 
+        padding: 3px 6px; 
+        top: 610px; 
+        right: 80px; 
+    }
 }
 
-.about{
-    background-color: #FFF;
-    margin: 5% 20rem;
-    padding: 2%;
+.boton-esquina3 {
+    position: absolute;
+    top: 570px; 
+    right: 100px; 
+    padding: 5px 10px; 
+    background-color: #b52100;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.boton-esquina3:hover {
+    background-color: #822506;
+}
+
+@media (max-width: 768px) {
+    .boton-esquina3 {
+        font-size: 12px; 
+        padding: 3px 6px; 
+        top: 610px; 
+        right: 200px; 
+    }
 }
