@@ -35,10 +35,8 @@ def login(request):
                         user.save()
                         logged = True
                         cookie(request, user)
-                        return render(request, 'main.html', {
-                            'logged' : logged,
-                            'username' : request.user
-                        })
+                        return redirect("main")
+
                     else:
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                         return redirect("login")

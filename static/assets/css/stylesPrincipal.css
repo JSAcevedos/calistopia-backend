@@ -205,11 +205,14 @@ img {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
+    margin: auto 25rem;
+    padding-bottom: 5%;
 }
 @media (min-width: 768px) {
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        margin: auto 25rem;
     }
 }
 @media (min-width: 1024px) {
@@ -242,4 +245,10 @@ img {
     margin: 1rem 0;
     text-align: center;
     line-height: 1.2;
+}
+
+.ejercicio__imagen {
+    min-height: 180px;
+    max-height: 180px;
+    min-width: 100%;
 }
