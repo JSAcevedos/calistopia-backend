@@ -1,13 +1,6 @@
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_str
 from django.template.loader import render_to_string
-from ..tokens import account_activation_token
-from django.http import HttpResponseNotFound
-from smtplib import SMTPRecipientsRefused
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
-from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.datastructures import MultiValueDictKeyError
@@ -20,7 +13,7 @@ def feedback(request):
         pqr = request.POST["type"]
         content = request.POST["feedback"]
         feedback = Feedback.objects.create_feedback(request.user.id, pqr, content)
-        messages.info(request,f"Tu y nuestros administradores han recibido un correo con tu {pqr}.")
+        messages.info(request,f"Tú y nuestros administradores han recibido un correo con tu {pqr}.")
         send_email(request, feedback)
     except MultiValueDictKeyError:
         pass

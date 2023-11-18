@@ -73,7 +73,7 @@ def login(request):
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                         return redirect("login")
                 else:
-                    user = User.objects.get(username=userName.lower())
+                    user = User.objects.get(email=userName.lower())
                     user.todayLoginAttempts = userTodayLoginAttempts + 1
                     user.save()
                     userTodayLoginAttempts = User.objects.get(email=userName.lower()).todayLoginAttempts
@@ -89,7 +89,7 @@ def login(request):
     except MultiValueDictKeyError:
         userName = False
         userPassword = False
-    return render(request, 'login.html')
+    return render(request, 'login_register/login.html')
 
 def logout(request):
     remove_cookie(request)

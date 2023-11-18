@@ -18,7 +18,7 @@ def user_view(request):
 @login_required
 def config(request):
     messages.info(request,"Para efectuar los cambios debes ingresar tu contraseña.")
-    return render(request, "data_modify.html")
+    return render(request, "config/data_modify.html")
 
 @login_required
 def change_config(request, id):

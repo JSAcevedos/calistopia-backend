@@ -38,8 +38,8 @@
                 <form method ="POST" class="formulario__login">
                     {% csrf_token %}
                     <h2>Iniciar Sesión</h2>
-                    <input name = "username" type="text" placeholder="Usuario">
-                    <input name = "password" type="password" placeholder="Contraseña" required>
+                    <input name = "username" type="text" maxlength ="200"  placeholder="Usuario">
+                    <input name = "password" type="password"  maxlength ="200" placeholder="Contraseña" required>
                     <a class="forgot-link" href="/password_reset/">¿Olvidaste tu contraseña?</a>
                     <button>Entrar</button>
                     {% if messages %}
@@ -64,8 +64,8 @@
                 <form action="/signup/" method="POST" class="formulario__register">
                     {% csrf_token %}
                     <h2>Registrarse</h2>
-                    <input name="email" type="text" placeholder="Correo Electronico" required>
-                    <input name="username" type="text" placeholder="Usuario" required>
+                    <input name="email" type="text" placeholder="Correo Electronico" maxlength ="200"  required>
+                    <input name="username" type="text" placeholder="Usuario" maxlength ="200"  required>
                     <input name="password" type="password" placeholder="Contraseña" minlength="8" required>
                     <input name="confirm-password" type="password" placeholder="Confirma la contraseña" required>
                     <button>Registrarse</button>

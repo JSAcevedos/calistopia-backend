@@ -13,7 +13,7 @@ from ..models import User
 
 def password_reset(request):
     if request.method == "GET":
-        return render(request, "recover_page.html")
+        return render(request, "login_register/recover_page.html")
     else:
         try:
             user = (
@@ -38,7 +38,7 @@ def reset(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         if request.method == "GET":
-            return render(request, "new_passw.html", {"uid": urlsafe_base64_encode(force_bytes(user.pk)), "token": token})
+            return render(request, "login_register/new_passw.html", {"uid": urlsafe_base64_encode(force_bytes(user.pk)), "token": token})
         else:
             if request.POST["new_password"] == request.POST["new_password2"]:
 
@@ -55,7 +55,7 @@ def reset(request, uidb64, token):
                     request,
                     "Las contraseñas no coinciden",
                 )
-                return render(request, "new_passw.html", {"uid": urlsafe_base64_encode(force_bytes(user.pk)), "token": token})
+                return render(request, "login_register/new_passw.html", {"uid": urlsafe_base64_encode(force_bytes(user.pk)), "token": token})
     else:
         messages.error(
             request, "Link Invalido, solicita restablecer tu contraseña nuevamente"
