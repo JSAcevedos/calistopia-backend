@@ -93,6 +93,8 @@ class Feedback(models.Model):
     content = models.CharField(max_length=1000)
     state = models.BooleanField(default = False)
 
+    on_delete = models.CASCADE
+
     objects = FeedbackManager()
 
 
