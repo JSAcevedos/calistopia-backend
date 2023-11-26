@@ -1,0 +1,402 @@
+:root{
+    --fuenteHeading: 'IBM Plex Mono', monospace;
+    --primario: rgba(189, 176, 92);
+    --secundario: rgba(220, 199, 130, 0.9);
+    --blanco: #ffffff;
+    --negro: #000000;
+    --gris: #F2F2F2;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; /*1rem = 10px*/
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--fuenteHeading);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    background-image: url(../images/fondo-principal.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/**GLOBALES**/
+.contenedor {
+    max-width: 120rem;
+    width: 90%;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--fuenteHeading);
+}
+
+h1 {
+    font-size: 4.8rem;
+}
+
+h2 {
+    font-size: 4rem;
+}
+
+h3 {
+    font-size: 3.2rem;
+}
+
+h4 {
+    font-size: 2.8rem;
+}
+
+img {
+    max-width: 100%;
+}
+
+/*Utilidades*/
+.no-margin{
+    margin: 0;
+}
+
+.no-padding{
+    padding: 0;
+}
+
+.centrar-texto{
+    text-align: center;
+}
+
+/*BODY*/
+/*body {
+    background-image: url(../images/fondo-principal.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}*/
+
+/*HEADER*/
+.header {
+    background-color: var(--secundario);
+    height: 20rem;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .header {
+        height: 10rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .barra {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+}
+
+.menu__hamburguesa{
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.menu__hamburguesa span {
+    display: block;
+    width: 100%;
+    height: 0.2rem;
+    background: var(--negro);
+    transform-origin: 0px 100%;
+    margin-top: 0.6rem;
+    transition: all 600ms;
+}
+
+.activeline1__menu-hamburguesa {
+    transform: rotate(45deg) translate(-2px, 1px);
+}
+
+.activeline2__menu-hamburguesa {
+    opacity: 0;
+    margin-left: -40px;
+}
+
+.activeline3__menu-hamburguesa {
+    transform: rotate(-45deg) translate(-4px, 2px);
+}
+
+
+.logo {
+    color: var(--negro);
+}
+
+.logo__nombre {
+    font-weight: 700;
+}
+
+.enlaceIngresar {
+    color: var(--negro);
+    font-size: 1.5rem;
+}
+
+.menuLateral__navegacion {
+    gap: 2rem;
+}
+
+.navegacion__enlace {
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--negro);
+    margin-top: 4rem;
+}
+
+.menuLateral {
+    font-family: var(--fuenteHeading);
+    background-color: var(--primario);
+    width: 260px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    visibility: hidden;
+    margin-top: 70px;
+    transition: 0.5s;
+    transform: translateX(-100%);
+}
+
+.desplegar {
+    visibility: visible;
+    transform: translateX(0%);
+}
+
+.menuLateral__texto {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.menuLateral__todos {
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+.menuLateral__fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1rem;
+    margin-left: 2rem;
+    height: 3rem;
+}
+
+.contenedor {
+    background-color: rgb(221,220,209);
+    padding: 0px;
+    margin: 20px;
+    border: 1px solid #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.contenedor h3 {
+    margin-top: 0; 
+}
+
+
+@media (max-width: 768px) {
+    .contenedor {
+        padding: 10px; 
+        margin: 10px;
+        max-width: 100%; 
+    }
+}
+
+
+.centrado {
+    text-align: center;
+    line-height: 100px; 
+}
+
+.perfil {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.imagen-de-perfil {
+    max-width: 150px; 
+    max-height: 150px; 
+    width: auto; 
+    height: auto; 
+    border: 2px solid rgba(189, 176, 92); 
+    border-radius: 50%; 
+}
+
+.informacion-usuario {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.cuadro-texto {
+    background-color: #ffffff;
+    padding: 5px; 
+    margin: 10px;
+    border: 1px solid #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Estilos para el botón */
+.boton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: #0056b3;
+}
+
+
+
+.boton-esquina {
+    padding: 8px 8px; 
+    background-color: rgb(214, 34, 14);
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton-esquina:hover {
+    background-color: #7e0604;
+}
+
+
+.boton-esquina2 {
+    position: absolute;
+    top: 520px; 
+    right: 100px; 
+    padding: 5px 10px; 
+    background-color: #069b01;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.boton-esquina2:hover {
+    background-color: #046922;
+}
+
+@media (max-width: 768px) {
+    .boton-esquina2 {
+        font-size: 12px; 
+        padding: 3px 6px; 
+        top: 610px; 
+        right: 80px; 
+    }
+}
+
+.boton-esquina3 {
+    position: absolute;
+    top: 570px; 
+    right: 100px; 
+    padding: 5px 10px; 
+    background-color: #b52100;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.boton-esquina3:hover {
+    background-color: #822506;
+}
+
+@media (max-width: 768px) {
+    .boton-esquina3 {
+        font-size: 12px; 
+        padding: 3px 6px; 
+        top: 610px; 
+        right: 200px; 
+    }
+}
+
+#container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px; 
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+
+  input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    margin-bottom: 15px;
+  }
+
+  button {
+    background-color: #4caf50;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
