@@ -8,7 +8,6 @@ from smtplib import SMTPRecipientsRefused
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.db import IntegrityError
-from django.http import HttpResponse
 from django.contrib import messages
 from ..models import User
 
@@ -19,10 +18,11 @@ def signup(request):
     else:
         try:
             if request.POST["password"] == request.POST["confirm-password"]:
+                email = request.POST["email"]
                 user = User.objects.create_user(
                     request.POST["username"], 
                     request.POST["password"], 
-                    request.POST["email"]
+                    email.lower()
                 )
                 activateEmail(request, user, user.email)
                 messages.success(request, '¡Cuenta creada! ¡Porfavor revisa tu correo para activar tu cuenta de Calistopia!') 

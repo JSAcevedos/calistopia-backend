@@ -78,3 +78,24 @@ class Exercise(models.Model):
     def __str__(self):
         string = self.name + ' (' + str(self.id) + ')' 
         return string
+
+
+class FeedbackManager(models.Manager):
+    def create_feedback(self, user_id, feedback_type, content):
+        feedback = self.create(user_id = user_id, feedback_type = feedback_type, content = content)
+        feedback.save(using=self._db)
+        return feedback
+
+class Feedback(models.Model):
+    user_id = models.IntegerField(null = False)
+    feedback_id = models.AutoField(primary_key=True, auto_created=True)
+    feedback_type = models.CharField(max_length=11)
+    content = models.CharField(max_length=1000)
+    state = models.BooleanField(default = False)
+
+    on_delete = models.CASCADE
+
+    objects = FeedbackManager()
+
+
+
