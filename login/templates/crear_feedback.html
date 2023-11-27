@@ -45,6 +45,7 @@
 
         <nav class="menuLateral__navegacion">
             <a href="/about/" class="navegacion__enlace">Nosotros</a>
+            <a href="{% static 'crear_feedback.html' %}" class="navegacion__enlace">PQRS</a>
             {% if user.is_authenticated %}
             <a href="/logout/" class="navegacion__enlace">Cerrar Sesión</a>
             {% endif %}
@@ -74,7 +75,7 @@
               <button type="submit">Enviar</button>
               
             </form>
-            <a class="enlaceIngresar" href="ver_feedback.html">
+            <a class="enlaceIngresar" href="{% static 'ver_feedback.html' %}">
                 <button type="submit">Ver mis feedbacks</button>
             </a>
             
