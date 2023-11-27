@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VerFeedback</title>
-    <link rel="stylesheet" href="./assets/css/stylesVerFeedback.css">
-    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="{% static '/assets/css/stylesVerFeedback.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
@@ -65,7 +65,7 @@
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td><a href="mi_feedback.html">Reclamación</a></td>
+                    <td><a href="{% static 'mi_feedback.html' %}">Reclamación</a></td>
                     <td>En revisión</td>
                   </tr>
                 </tbody>
