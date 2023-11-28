@@ -28,6 +28,11 @@ body {
 }
 
 /**GLOBALES**/
+
+.hidden {
+    display: none !important;
+}
+
 .contenedor {
     max-width: 120rem;
     width: 90%;
@@ -36,6 +41,12 @@ body {
 
 a {
     text-decoration: none;
+    cursor: pointer;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #000000;
 }
 
 h1, h2, h3, h4 {
@@ -60,6 +71,20 @@ h4 {
 
 img {
     max-width: 100%;
+}
+
+.back_button{
+    position: absolute;
+    text-align: center;
+    background-color: var(--primario);
+    padding: 1rem;
+    top: 1rem;
+    right: 1rem;
+    color: #000000;
+}
+
+.back_button:hover{
+    background-color: var(--secundario);
 }
 
 /*Utilidades*/
@@ -205,29 +230,33 @@ img {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
-    margin: auto 25rem;
+    margin: auto 1rem;
     padding-bottom: 5%;
 }
 @media (min-width: 768px) {
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        margin: auto 25rem;
+        margin: auto 2rem;
     }
 }
 @media (min-width: 1024px) {
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        margin: auto 25rem;
+        margin: auto 2rem;
     }
 }
 
 /*EJERCICIOS*/
 .ejercicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--secundario);
     padding: 1rem;
     margin-top: 5rem;
+    max-width: 350px;
 }
 
 .ejercicio__nombre {
@@ -300,4 +329,186 @@ img {
 .exercise__related__not__found {
     padding: 3%;
 }
+
+/**********************************************************************************************/
+/**Routine page styles**/
+/**********************************************************************************************/
+
+.routines{
+    background-color: #FFF;
+    margin: 5% 10rem;
+    display: flex;
+    position: relative;
+}
+
+.top_routine{
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0px;
+    margin-bottom: 2rem;
+}
+
+.nombre_rutina{
+    margin: 0;
+    font-size: 2rem;
+    margin-right: 15rem;
+}
+
+.button_routines{
+    width: 10%;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.boton_nombre{
+    background-color: #0A69BD;
+}
+.boton_agregar{
+    background-color: green;
+}
+.boton_eliminar{
+    background-color: red;
+}
+
+.ejercicio_rutina{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: var(--secundario);
+    height: 100%;
+    padding-left: 1%;
+    margin: 2rem;;
+}
+
+.ejercicio_rutina h4{
+    margin-right: 1rem;
+    margin-bottom: 10rem;
+}
+
+.ejercicio_rutina_elemento{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.ejercicio_rutina_elemento_cerrar{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+
+.numero_ejercicio{
+    margin-right: 3rem;
+}
+
+.ejercicio_layout{
+    margin-top: 0;
+    max-width: 250px;
+    min-width: 250px;
+    position: relative;
+}
+
+.nombre_ejercicio_rutina{
+    font-size: 2rem;
+}
+
+.param_ejercicio{
+    width: 70%;
+    height: 80%;
+    margin-left: 1rem;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-right: 0;
+}
+
+
+.campo label{
+    margin-right: 1rem;
+}
+
+.campo_ejercicio{
+    width: 50%;
+    height: 3rem;
+    border-radius: 6px;
+    border: 2px solid var(--negro);
+    margin-top: 1rem;
+}
+
+.ejercicio_rutina_input_titulo{
+    position: absolute;
+    padding: 1rem;
+    margin: 1rem 0;
+    margin-right: 1rem;
+    top: 15.5rem;
+    left: 4rem;
+    width: 35rem;
+}
+
+.ejercicio_rutina_button_crear{
+    position: absolute;
+    padding: 1rem;
+    margin: 1rem 0;
+    margin-right: 1rem;
+    top: 15.5rem;
+    left: 39rem;
+}
+
+.ejercicio_rutina_button_modificar{
+    position: absolute;
+    padding: 1rem;
+    margin: 1rem 0;
+    margin-right: 1rem;
+    top: 15.5rem;
+    left: 39rem;
+    background-color: #080;
+}
+
+
+
+/**********************************************************************************************/
+/**********************************************************************************************/
+
+
+/**********************************************************************************************/
+/**Filter**/
+/**********************************************************************************************/
+
+.filter_main {
+    background-color: #FFF;
+    margin: 0% 10%;
+    padding: 0 1% 1% 1%;
+}
+
+.main_filter_catalogue {
+    background: transparent;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin: 10rem;
+
+}
+
+.main .filter {
+    background: #FFF;
+    padding: 3rem 4rem;
+    border-radius: 0.5rem;
+}
+
+.main .filter h3{
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/**********************************************************************************************/
+/**********************************************************************************************/
 

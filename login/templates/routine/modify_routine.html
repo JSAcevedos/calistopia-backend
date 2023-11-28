@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calistopía</title>
+    {% csrf_token %}
+    <title>Calistoía</title>
+
     <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
     <link rel="stylesheet" href="{% static '/assets/css/stylesPrincipal.css' %}">
@@ -12,8 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+
     <header class="header">
 
         <div class="barra">
@@ -27,15 +30,18 @@
                 <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
             </a>
 
+            
             {% if user.is_authenticated %}
             <a class="enlaceIngresar" href="/user/">
                 <p>Perfil</p>
             </a>
             {% else %}
+           
             <a class="enlaceIngresar" href="/login/">
                 <p>Ingresar</p>
             </a>
             {% endif %}
+            
         </div>
 
     </header>
@@ -43,7 +49,8 @@
     <aside id="aside" class="menuLateral">
 
         <nav class="menuLateral__navegacion">
-            <a href="/about/" class="navegacion__enlace">Nosotros</a>
+            <a href="/" class="navegacion__enlace">Inicio {{ check }}</a>
+            <a href="./nosotros.html" class="navegacion__enlace">Nosotros</a>
             {% if user.is_authenticated %}
             <a href="/logout/" class="navegacion__enlace">Cerrar Sesión</a>
             {% endif %}
@@ -51,13 +58,54 @@
 
     </aside>
 
-    <div class="main">
+    <div class="routines">
 
-        <div class="main_filter_catalogue filter_catalogue">
+        <a href="/routines/{{ routine_id }}/" class="back_button">Volver</a>
+
+        <input class="ejercicio_rutina_input_titulo" type="text" placeholder="Nombre de tu rutina" value="{{ routine_name }}">
+        <a class="ejercicio_rutina_button_modificar" >Guardar</a>
+
+        <div class="ejercicio_rutina {{ routine_id }}">
+            <h4>Aquí se mostrarán los ejercicios de tu rutina:</h4>
+            {% for exercise in exercises %}
+
+                <div class="ejercicio_rutina_elemento">
+                    <div class="ejercicio ejercicio_layout">
+                        <a class="ejercicio_rutina_elemento_cerrar" href="">
+                            <img class="ejercicio__imagen_cerrar {{ exercise.name }} delete" src="https://cdn-icons-png.flaticon.com/128/6276/6276642.png" alt="imagen ejercicio">
+                        </a>
+                        <img class="ejercicio__imagen" src="{{ exercise.logo }}" alt="imagen ejercicio">
+                        <div class="ejercicio__informacion">
+                            <p class="ejercicio__nombre nombre_ejercicio_rutina">{{ exercise.name }}</p>
+                            <p class="ejercicio__musculo">{{ exercise.group }}</p>
+                        </div>
+                    </div>
+            
+                    <div class="param_ejercicio">
+                        <div class="campo">
+                            <label class="campo_nombre_series">Series</label>
+                            <input class="campo_ejercicio" type="number" min="0" max="100" pattern="\d{1,3}" inputmode="numeric" value="{{ exercise.series }}">
+                        </div>
+            
+                        <div class="campo">
+                            <label>Repeticiones</label>
+                            <input class="campo_ejercicio" type="number" min="0" max="100" pattern="\d{1,3}" inputmode="numeric" value="{{ exercise.cycles }}">
+                        </div>
+            
+                        <div class="campo">
+                            <label class="campo_nombre_descanso">Descanso(Min)</label>
+                            <input class="campo_ejercicio" type="number" min="0" max="100" pattern="\d{1,3}" inputmode="numeric" value="{{ exercise.rest }}">
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="filter_catalogue">
             <div class="filter">
-                <h3>Buscar por:</h3>
-                <form action="" method="POST" class="filter__form">
-                    {% csrf_token %}
+                <h3 class="filter_h3">Buscar por:</h3>
+                <form action="/routine/create/" method="POST" class="filter__form">
                     <label for="name">Nombre:</label>
                     <input type="text" name="name" class="filter__form__name" id="name">
 
@@ -92,14 +140,15 @@
     
                 {% for exercise in catalogue %}
         
-                <div class="ejercicio {{ exercise.level }} {{ exercise.group }} {{ exercise.name }}">
-                    <a name="link" href="/exercise/{{ exercise.id }}" >
+                <div class="ejercicio ejercicio_catalogo {{ exercise.level }} {{ exercise.group }} {{ exercise.name }}">
+                    <a name="link" href="/exercise/{{ exercise.id }}" target="_blank" >
                         <img name="imagen" class="ejercicio__imagen" src="{{ exercise.logo }}" alt="imagen ejercicio">
                         <div name="descripcion" class="ejercicio__informacion">
                             <p name="nombre" class="ejercicio__nombre">{{ exercise.name }}</p>
                             <p name="grupo" class="ejercicio__musculo">{{ exercise.group }}</p>
                         </div>
                     </a>
+                    <button name="boton" class="ejercicio__agregar">Agregar</button>
                 </div>
         
                 {% endfor %}
@@ -116,9 +165,8 @@
 
     </div>
 
-
+    <script src="{% static '/assets/js/scriptModifyUser.js' %}"></script>
     <script src="{% static '/assets/js/scriptMain.js' %}"></script>
-    <script src="{% static '/assets/js/scriptPaginaPrincipal.js' %}"></script>
 
 </body>
 </html>

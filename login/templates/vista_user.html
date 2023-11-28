@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Usuario</title>
+    <title>Perfil {{ username }}</title>
     <link rel="stylesheet" href="{% static '/assets/css/stylesVistaUser.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,48 +57,67 @@
         <img class="imagen-de-perfil" src="{% static '/assets/images/perfil3.png' %}" alt="Foto de perfil">
     </div>
     <div class="informacion-usuario">
+
+        <div class="scroll-bg">
+            HISTORIAL ACCIONES
+            <div class="scroll-div">
+                <div class="scroll">
+                    <ul>
+                    <!--{% if historial %}
+                        {% for texto in historial %}
+                            <li>{{ texto }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No hay historial disponible</li>
+                    {% endif %} -->
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div class="cuadro-texto">
             <p>{{user.username}}</p>
         </div>
+
         <div class="cuadro-texto">
             <p>{{user.email}}</p>
         </div>
+
     </div>
+
     <a href = "./config/"><button class="boton">Cambiar Datos</button></a>
+
     <br>
+
     <div class="contenedor">
+
         <h3 class="centrado">Mis rutinas</h3>
-        <!-- <button class="boton-esquina2">Añadir rutina</button>
-        <button class="boton-esquina3">Eliminar rutina</button> -->
-        <div class="grid">
-            <div class="ejercicio">
-                <a href="">
-                    <img class="ejercicio__imagen" src="{% static '/assets/images/vacio3.jpg' %}" alt="imagen ejercicio">
-                    <div class="ejercicio__informacion">
-                        <p class="ejercicio__nombre">RUTINA 1</p>
-                        <p class="ejercicio__musculo">Descripción rutina</p>
-                    </div>
-                </a>
-            </div> 
-            <div class="ejercicio">
-                <a href="">
-                    <img class="ejercicio__imagen" src="{% static '/assets/images/vacio3.jpg' %}" alt="imagen ejercicio">
-                    <div class="ejercicio__informacion">
-                        <p class="ejercicio__nombre">RUTINA 2</p>
-                        <p class="ejercicio__musculo">Descripción rutina</p>
-                    </div>
-                </a>
-            </div> 
-            <div class="ejercicio">
-                <a href="">
-                    <img class="ejercicio__imagen" src="{% static '/assets/images/vacio3.jpg' %}" alt="imagen ejercicio">
-                    <div class="ejercicio__informacion">
-                        <p class="ejercicio__nombre">RUTINA 3</p>
-                        <p class="ejercicio__musculo">Descripción rutina</p>
-                    </div>
-                </a>
-            </div> 
+        <a class="contenedor_boton_crear_rutina" href="/routine/create/">Crear rutina</a>
+        
+        <div class="routines_viwer">
+
+            {% if routines %}
+
+                {% for routine in routines %}
+
+                    <a class="ejercicio" href="/routines/{{ routine.id }}">
+
+
+                        <img class="ejercicio__imagen" src="{{ routine.logo }}" alt="imagen ejercicio">
+
+                        
+                        <div class="ejercicio__informacion">
+                            <p class="ejercicio__nombre">{{ routine.name }}</p>
+                        </div>
+                    </a> 
+            
+                {% endfor %}
+
+            {% endif %}
+
         </div>
+
     </div>
 
     <script src="{% static '/assets/js/scriptPaginaPrincipal.js' %}"></script>

@@ -19,4 +19,7 @@ urlpatterns = [
     path('user_feedback/', views.user_feedback, name='user_feedback'),
     path('user_feedback/<int:fid>/', views.feedback_content, name='feedback_content'),
     path('user_feedback/<int:fid>/delete/', views.delete_feedback, name='feedback_content'),
+    path('routines/<int:routine_id>/', views.routine, name='routine'),
+    path('routine/create/', views.create_routine, name='create_routine'),
+    path('routine/modify/<int:routine_id>/', views.modify_routine, name='modify_routine'),
 ]
