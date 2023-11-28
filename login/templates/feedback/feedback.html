@@ -1,58 +1,79 @@
-{% load static %}
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calistopía dataModify </title>
-
-    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <title>CrearFeedback</title>
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/stylesCrearFeedback.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
-
 </head>
 <body>
 
-    <main>
-        <div class="contenedor__todo">
+    <header class="header">
 
+        <div class="barra">
+            <div id="open-close" class="menu__hamburguesa">
+                <span class="line1__menu-hamburguesa"></span>
+                <span class="line2__menu-hamburguesa"></span>
+                <span class="line3__menu-hamburguesa"></span>
+            </div>
 
-            <!--Formulario de modificación de datos-->
-            <div action="" class="contenedor__dataModify" id="blur">
+            <a class="logo" href="/">
+                <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
+            </a>
 
-                <style>
+            <a class="enlaceIngresar" href="javascript: history.go(-1)">
+                <p>Volver</p>
+            </a>
 
-                    .formulario__actualizaDatos{
-                        display: flex;
-                        flex-flow: column;
-                    }
+        </div>
 
-                    .texto-alerta {
-                        margin-left: 23px;
-                    }
+    </header>
 
-                    .alerta {
-                                width: 84%;
-                                margin-left: 28px;
-                            }
+    <aside id="aside" class="menuLateral">
 
-                </style>
+        <nav class="menuLateral__navegacion">
+            <a href="/about/" class="navegacion__enlace">Nosotros</a>
+            <a href="." class="navegacion__enlace">PQRS</a>
+            {% if user.is_authenticated %}
+            <a href="/logout/" class="navegacion__enlace">Cerrar Sesión</a>
+            {% endif %}
+        </nav>
 
-                <form class="formulario__actualizaDatos" action = "" method = "POST">
-                    {% csrf_token %}
-                    <h2>Feedback </h2>
-                    <h1>Tipo de comentario </h1>
-                    <input type="Radio" name="type" value="Petición" required>Petición
-                    <input type="Radio" name="type" value="Queja">Queja
-                    <input type="Radio" name="type" value="Reclamación">Reclamación
-                    <h1>Deja tu comentario aquí </h1>
-                    <input name="feedback" type="text" maxlength="1000" placeholder= "Escribe aquí tu comentario" required>
+    </aside>
 
-                    {% if messages %}
+    <div class="contenedor">
+        <h3 class="centrado">PQRs Calistopia</h3>
+        <div id="container">
+            <form action = "" method = "POST">
+                {% csrf_token %}
+              <h2>Tipo de comentario</h2>
+
+              <input type="radio" id="queja" name="type" value="Queja" required>
+              <label for="queja">Queja</label>
+
+              <input type="radio" id="peticion" name="type" value="Petición">
+              <label for="peticion">Petición</label>
+
+              <input type="radio" id="reclamacion" name="type" value="Reclamación">
+              <label for="reclamacion">Reclamación</label>
+
+              <h2>Deja tu comentario aquí</h2>
+              <textarea id="comentario" name="feedback" maxlength="1000"  placeholder="Escribe tu comentario aquí..." required></textarea>
+              <br>
+              <br>
+              <button type="submit" >Enviar</button>
+
+            </form>
+            {% if messages %}
                     {% for message in messages %}
                     <div class="alerta {{ message.tags }}">
                         <div class="icono-alerta">
@@ -65,15 +86,30 @@
                         </div>
                     </div>
                     {% endfor %}
-                    {% endif %}
+            {% endif %}
+            <a class="enlaceIngresar" href="../user_feedback/">
+                <button type="submit">Ver mis comentarios</button>
+            </a>
 
-                    <button> Envíar feedback </button>
-                </form>
+          </div>
+          <br>
+          <br>
+    </div>
 
-        </div>
+    <script src="{% static '/assets/js/scriptPaginaPrincipal.js' %}"></script>
 
-    </main>
-
-    <script src="{% static 'assets/js/scriptdataModify.js' %}"></script>
 </body>
 </html>
+
+
+<!--                <form class="formulario__actualizaDatos" action = "" method = "POST">-->
+<!--                    {% csrf_token %}-->
+<!--                    <h2>Feedback </h2>-->
+<!--                    <h1>Tipo de comentario </h1>-->
+<!--                    <input type="Radio" name="type" value="Petición" required>Petición-->
+<!--                    <input type="Radio" name="type" value="Queja">Queja-->
+<!--                    <input type="Radio" name="type" value="Reclamación">Reclamación-->
+<!--                    <h1>Deja tu comentario aquí </h1>-->
+<!--                    <input name="feedback" type="text" maxlength="1000" placeholder= "Escribe aquí tu comentario" required>-->
+<!--                    <button> Envíar feedback </button>-->
+<!--                </form>-->

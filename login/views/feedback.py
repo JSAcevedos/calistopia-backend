@@ -1,5 +1,5 @@
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -65,7 +65,25 @@ def send_email(request, feedback):
                 "protocol": "https" if request.is_secure() else "http",
             },
         )
-    user_email = EmailMessage(user_mail_subject, user_message, to=[request.user.email])
+    user_email = EmailMultiAlternatives(user_mail_subject, user_message, to=[request.user.email], bcc=["calistopia2023@gmail.com"])
     admin_email = EmailMessage(admin_mail_subject, admin_message, to=["calistopia2023@gmail.com"])
     user_email.send()
     admin_email.send()
+
+@login_required
+def actualice_feedback(request, fid):
+    try:
+        if request.user.is_admin:
+            feedback = Feedback.objects.get(feedback_id=fid)
+            respuesta = request.POST["respuesta"]
+
+            new_content = feedback.content + "\n\n***Respuesta de los administradores***\n\n" + respuesta
+
+            #feedback.content = "El back lever no es de espalda."
+            feedback.content = new_content
+            feedback.state = True
+            feedback.save()
+
+        return redirect(f"/user_feedback/{fid}/")
+    except:
+        raise Http404
