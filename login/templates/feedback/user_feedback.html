@@ -1,0 +1,92 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerFeedback</title>
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/stylesVerFeedback.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
+</head>
+<body>
+
+    <header class="header">
+
+        <div class="barra">
+            <div id="open-close" class="menu__hamburguesa">
+                <span class="line1__menu-hamburguesa"></span>
+                <span class="line2__menu-hamburguesa"></span>
+                <span class="line3__menu-hamburguesa"></span>
+            </div>
+
+            <a class="logo" href="/">
+                <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
+            </a>
+            <a class="enlaceIngresar" href="javascript: history.go(-1)">
+                <p>Volver</p>
+            </a>
+        </div>
+
+    </header>
+
+    <aside id="aside" class="menuLateral">
+
+        <nav class="menuLateral__navegacion">
+            <a href="/about/" class="navegacion__enlace">Nosotros</a>
+            <a href="./feedback" class="navegacion__enlace">PQRS</a>
+            {% if user.is_authenticated %}
+            <a href="/logout/" class="navegacion__enlace">Cerrar Sesión</a>
+            {% endif %}
+        </nav>
+
+    </aside>
+
+    <div class="contenedor">
+        <h3 class="centrado">Mis Comentarios</h3>
+        <div id="container">
+            <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tipo de comentario</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                {% if feedback %}
+                    {% for item in feedback %}
+                        {% for index in item %}
+                            <tbody>
+                              <tr>
+                                <td>{{index.feedback_id}}</td>
+                                <td><a href ="./{{index.feedback_id}}/">{{index.feedback_type}}</a></td>
+                                <td>
+                                    {% if index.state %}
+                                        Resuelta
+                                    {% else %}
+                                        En revisión
+                                    {% endif %}
+                                </td>
+                              </tr>
+                            </tbody>
+                        {% endfor %}
+                    {% endfor %}
+                    {% endif %}
+
+              </table>
+          </div>
+          <br>
+          <br>
+    </div>
+
+    <script src="{% static '/assets/js/scriptPaginaPrincipal.js' %}"></script>
+
+</body>
+</html>

@@ -1,19 +1,20 @@
-{% load static %}
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calistopía</title>
+    <title>MiFeedback</title>
+    <link rel="stylesheet" href="{% static '/assets/css/stylesMiFeedback.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
-    <link rel="stylesheet" href="{% static '/assets/css/stylesPrincipal.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+
     <header class="header">
 
         <div class="barra">
@@ -27,15 +28,6 @@
                 <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
             </a>
 
-            {% if user.is_authenticated %}
-            <a class="enlaceIngresar" href="/logout/">
-                <p>Perfil</p>
-            </a>
-            {% else %}
-            <a class="enlaceIngresar" href="/login/">
-                <p>Ingresar</p>
-            </a>
-            {% endif %}
             <a class="enlaceIngresar" href="javascript: history.go(-1)">
                 <p>Volver</p>
             </a>
@@ -55,11 +47,33 @@
 
     </aside>
 
-    <div class="about">
-        <h3 class="centrado">SOBRE NOSOTROS</h3>
-        <p>Somos 'Los 50 de Joselito', un grupo estudiantil dedicado a la creación de una solución innovadora para mejorar la vida de las personas mediante la calistenia. Nuestro equipo está compuesto por 7 integrantes.</p>   
-        <p>Desde nuestro núcleo, nos hemos esforzado para desarrollar un servicio que deje una huella en el mundo. Creemos en el poder de la tecnología como herramienta para cambiar vidas y estamos comprometidos a utilizar nuestro conocimiento y experiencia para hacer del mundo un lugar más activo.</p>
+    <div class="contenedor">
+        <br>
+        <br>
+        <div id="container">
+            <p><pre>{{feedback.content}}</pre></p>
+            <a href = "./delete/"><button type="submit" class="boton-esquina" >Eliminar {{feedback.feedback_type}}</button></a>
+          </div>
+          <br>
+          <br>
     </div>
+
+    {% if user.is_admin %}
+    <div class="contenedor">
+        <h3 class="centrado">Respuesta</h3>
+        <div id="container">
+            <form action = "./actualice_feedback/" method = "POST">
+                {% csrf_token %}
+
+              <textarea id="comentario" name="respuesta" maxlength="1000"  placeholder="Escribe tu comentario aquí..." required></textarea>
+              <br>
+              <br>
+              <button type="submit" >Enviar respuesta</button>
+          </div>
+          <br>
+          <br>
+    </div>
+    {% endif %}
 
     <script src="{% static '/assets/js/scriptPaginaPrincipal.js' %}"></script>
 

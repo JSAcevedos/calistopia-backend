@@ -7,6 +7,7 @@
     <title>Calistopía dataModify </title>
 
     <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/stylesVistaUser.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +17,27 @@
 
 </head>
 <body>
+
+    <header class="header">
+
+        <div class="barra">
+            <div id="open-close" class="menu__hamburguesa">
+<!--                <span class="line1__menu-hamburguesa"></span>-->
+<!--                <span class="line2__menu-hamburguesa"></span>-->
+<!--                <span class="line3__menu-hamburguesa"></span>-->
+            </div>
+
+            <a class="logo" href="/">
+                <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
+            </a>
+
+            <a class="enlaceIngresar" href="javascript: history.go(-1)">
+                <p>Volver</p>
+            </a>
+
+        </div>
+
+    </header>
 
     <main>
         <div class="contenedor__todo">
@@ -41,7 +63,6 @@
                             }
 
                 </style>
-
                 <form class="formulario__actualizaDatos" action = "./username/" method = "POST">
                     {% csrf_token %}
                     <h2>Actualizar datos </h2>
@@ -77,7 +98,7 @@
                     {% endfor %}
                     {% endif %}
 
-                    <button formaction = "./delete/" style = "background-color : #DF2A2A;"> ELIMINAR CUENTA </button>
+                    <button formaction = "./delete/" style = "background-color : #DF2A2A; margin-top: 2rem;"> ELIMINAR CUENTA </button>
                 </form>
 
         </div>

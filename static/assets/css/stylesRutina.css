@@ -1,0 +1,86 @@
+.routine{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin: 10rem;
+    padding: 4rem;
+    text-align: center;
+    position: relative;
+}
+
+.routine_exercise{
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.routine_exercise_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(189, 176, 92);
+    padding: 2rem;
+    overflow: hidden;
+    max-width: 310px;
+    min-width: 310px;
+    margin-right: 3rem;
+    position: relative;
+}
+
+.routine_exercise_item_imagen{
+    min-width: 270px;
+    max-width: 270px;
+    min-height: 180px;
+    max-height: 180px;
+}
+
+.routine_exercise_item:hover{
+    background-color: rgba(195, 186, 102);
+    padding: 2rem;
+}
+
+.routine_exercise_item_nombre{
+    font-size: 2rem;
+}
+
+.routine_exercise_description{
+    width: 100%;
+    padding: 2rem;
+}
+
+.routine_exercise_description:hover{
+    background-color: #DDD;
+}
+
+.routine_exercise_description h5{
+    font-size: 2rem;
+}
+
+.routine_title{
+    border: 1px solid #000;
+    padding: 1rem;
+    font-size: 35px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.routine_modify_button{
+    background-color: #66F;
+    padding: 1rem;
+    margin-bottom: 3rem;
+    border-radius: 4px;
+    width: 310px;
+}
+
+.routine_modify_button:hover{
+    background-color: #99F;
+}
+
+.back_button_routine{
+    position: absolute;
+    text-align: center;
+    background-color: var(--primario);
+    padding: 1rem;
+    top: 12rem;
+    right: 4rem;
+    color: #000000;
+}

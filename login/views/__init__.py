@@ -5,3 +5,5 @@ from .password_reset import *
 from .config import *
 from .exercise import *
 from .about import *
+from .feedback import *
+from .routine import *

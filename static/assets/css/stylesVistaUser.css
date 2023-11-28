@@ -29,6 +29,9 @@ body {
 
 /**GLOBALES**/
 .contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 120rem;
     width: 90%;
     margin: 0 auto;
@@ -264,6 +267,83 @@ img {
     margin-top: 10px;
 }
 
+.scroll-bg{
+
+    position:absolute;
+
+    background: rgb(221,220,209);
+
+    width: 272px;
+    left: 75px;
+    top: 120px;
+
+    margin: 0px;
+    padding: 10px;
+
+    border: 1px solid #000;
+    border-radius: 5px;
+
+    font-weight: bold;
+    text-align: center;
+
+}
+
+
+.scroll-div{
+
+    width: 250px;
+    background: rgb(221,220,209);
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+    font-weight: normal;
+
+}
+
+.scroll-div::-webkit-scrollbar {
+    width: 10px; /* ajusta el ancho de la barra de desplazamiento */
+}
+
+.scroll-div::-webkit-scrollbar-thumb {
+    background-color: #555; /* color de la barra de desplazamiento */
+    border-radius: 5px; /* esquinas redondeadas de la barra de desplazamiento */
+}
+
+.scroll-div::-webkit-scrollbar-track {
+    background-color: #ccc; /* color de fondo de la barra de desplazamiento */
+}
+
+
+
+.scroll ul li{
+    text-align:justify;
+    background: #fff;
+    width: 230px;
+    position:relative;
+    left: -38px;
+    list-style: none;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    box-shadow: 0 0 5px rgba(189, 176, 92, 0.4);
+    border-radius: 5px;
+    margin-top: 5px;
+
+}
+
+.scroll-div:-webkit-scrollbar {
+
+    width: 10px;
+    background:
+    • #000000;
+}
+
+.scroll-div::-webkit-scrollbar-thumb {
+
+    background: rgba(255,255, 255, •2);
+    border-radius: 10px;
+    border-right: 2px solid #ffffff;
+}
+
 .cuadro-texto {
     background-color: #ffffff;
     padding: 5px; 
@@ -372,11 +452,6 @@ img {
     cursor: pointer;
 }
 
-
-.boton-esquina2:hover {
-    background-color: #046922;
-}
-
 @media (max-width: 768px) {
     .boton-esquina2 {
         font-size: 12px; 
@@ -411,3 +486,129 @@ img {
         right: 200px; 
     }
 }
+
+/**********************************************************************************************/
+/**Routine page styles**/
+/**********************************************************************************************/
+
+.routines{
+    background-color: #FFF;
+    margin: 5% 10rem;
+    padding: 2%;
+}
+
+.top_routine{
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0px;
+    margin-bottom: 2rem;
+}
+
+.nombre_rutina{
+    margin: 0;
+    font-size: 2rem;
+    margin-right: 15rem;
+}
+
+.button_routines{
+    width: 10%;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.ejercicio_rutina{
+    display: flex;
+    background-color: var(--secundario);
+    align-items: center;
+    justify-content: flex-start;
+    height: 30rem;
+}
+
+.numero_ejercicio{
+    margin-right: 3rem;
+}
+
+.ejercicio_layout{
+    margin-top: 0;
+    width: 30%;
+}
+
+.nombre_ejercicio_rutina{
+    font-size: 2rem;
+}
+
+.param_ejercicio{
+    width: 70%;
+    height: 80%;
+    margin-left: 3rem;
+}
+
+.campo{
+    display: flex;
+    margin-top: 2rem;
+    margin-right: 2rem;
+}
+
+.campo_nombre_series{
+    margin-right: 5.5rem;
+}
+
+.campo_nombre_descanso{
+    margin-right: 3.8rem;
+}
+
+.campo_ejercicio{
+    width: 20%;
+    height: 3rem;
+    border-radius: 6px;
+    border: 2px solid var(--negro);
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+/**********************************************************************************************/
+/**********************************************************************************************/
+
+/**********************************************************************************************/
+/**Rutina**/
+/**********************************************************************************************/
+
+.contenedor_boton_crear_rutina{
+    background-color: #0A0;
+    padding: 1rem;
+    width: 15rem;
+    margin-top: -5rem;
+    text-align: center;
+    border:1px solid #000;
+}
+
+.contenedor_boton_crear_rutina:hover {
+    background-color: #8F8;
+
+}
+
+/**********************************************************************************************/
+/**********************************************************************************************/
+
+/**********************************************************************************************/
+/**Rutinas de usuario**/
+/**********************************************************************************************/
+
+.routines_viwer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+.ejercicio__imagen{
+    max-width: 270px;
+    max-height: 180px;
+    min-height: 180px;
+}
+
+/**********************************************************************************************/
+/**********************************************************************************************/

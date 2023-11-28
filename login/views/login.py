@@ -52,19 +52,19 @@ def login(request):
             else:
                     messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
                     return redirect("login")
-        elif User.objects.filter(email = userName).exists():
-            userTodayLoginAttempts = User.objects.get(email=userName).todayLoginAttempts
+        elif User.objects.filter(email = userName.lower()).exists():
+            userTodayLoginAttempts = User.objects.get(email=userName.lower()).todayLoginAttempts
 
-            if now >= User.objects.get(email=userName).lastLoginAttemptDate + datetime.timedelta(1):
-                user = User.objects.get(email=userName)
+            if now >= User.objects.get(email=userName.lower()).lastLoginAttemptDate + datetime.timedelta(1):
+                user = User.objects.get(email=userName.lower())
                 user.todayLoginAttempts = 0
                 user.save()
 
             if userTodayLoginAttempts != 10:
-                password = User.objects.get(email=userName).password
+                password = User.objects.get(email=userName.lower()).password
                 if check_password(userPassword, password):
-                    if User.objects.get(email = userName).active:
-                        user = User.objects.get(email=userName)
+                    if User.objects.get(email = userName.lower()).active:
+                        user = User.objects.get(email=userName.lower())
                         user.todayLoginAttempts = 0
                         user.save()
                         cookie(request, user)
@@ -73,11 +73,11 @@ def login(request):
                         messages.info(request, f"La cuenta no ha sido activa, porfavor usa el link enviado a tu correo para activarla.")
                         return redirect("login")
                 else:
-                    user = User.objects.get(username=userName)
+                    user = User.objects.get(email=userName.lower())
                     user.todayLoginAttempts = userTodayLoginAttempts + 1
                     user.save()
-                    userTodayLoginAttempts = User.objects.get(email=userName).todayLoginAttempts
-                    messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
+                    userTodayLoginAttempts = User.objects.get(email=userName.lower()).todayLoginAttempts
+                    messages.info(request, f"La contraseña ingresada no es correcta para {userName.lower()}.")
                     messages.info(request, f"Quedan {10 - userTodayLoginAttempts} intentos.")
                     return redirect("login")
             else:
@@ -89,7 +89,7 @@ def login(request):
     except MultiValueDictKeyError:
         userName = False
         userPassword = False
-    return render(request, 'login.html')
+    return render(request, 'login_register/login.html')
 
 def logout(request):
     remove_cookie(request)

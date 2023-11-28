@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calistopía</title>
+    <title>Calistoía</title>
+
     <link rel="stylesheet" href="{% static '/assets/css/normalize.css' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/assets/images/logo.jpeg' %}" />
     <link rel="stylesheet" href="{% static '/assets/css/stylesPrincipal.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/stylesRutina.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+
     <header class="header">
 
         <div class="barra">
@@ -27,9 +30,18 @@
                 <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
             </a>
 
-            <a class="enlaceIngresar" href="/">
-                <p>Volver</p>
+            
+            {% if user.is_authenticated %}
+            <a class="enlaceIngresar" href="/user/">
+                <p>Perfil</p>
             </a>
+            {% else %}
+           
+            <a class="enlaceIngresar" href="/login/">
+                <p>Ingresar</p>
+            </a>
+            {% endif %}
+            
         </div>
 
     </header>
@@ -45,38 +57,26 @@
         </nav>
 
     </aside>
-    <div class="exercise">
-        <iframe class="exercise__video" src="{{ exercise.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <h1>
-            {{ exercise.name }}
-        </h1>
-        <h3>
-            Grupo muscular: {{ exercise.group }}
-        </h3>
-        <strong>Dificultad: </strong>{{ exercise.level }}
-        <p>
-            {{ exercise.description }}
-        </p>
-        <h3>Ejercicios similares</h3>
-        <p>En este apartado podras encontrar diferentes ejercicios para el mismo grupo muscular, todos con el mismo nivel de dificultad para variar tu rutina!</p>
-        <div class="exercise__related__contanier">
-            {% if related %}
-                {% for similar in related %}
 
-                    <a href="/exercise/{{ similar.id }}">
-                        <div class="exercise__related">
-                            <strong class="exercise__related__title">{{ similar.name }}</strong>
-                            <img class="exercise__related__image" src="{{ similar.logo }}" alt="imagen ejercicio">
-                        </div>
-                    </a>
+    <div class="routine">
 
-                {% endfor %}
-            {% else %}
+        <a href="/user/" class="back_button_routine">Volver</a>
 
-                    <strong class="exercise__related__not__found">Aún no tenemos ejercicios relacionados, pero estamos trabajando para traer proximamente, perdona las molestias :D</strong>
-
-            {% endif %}
-        </div>
+        <input class="routine_title" value="{{ title }}" readonly />
+        <a class="routine_modify_button {{ routine_id }}" href="/routine/modify/{{ routine_id }}">Modificar rutina</a>
+        {% for exercise in exercises %}
+        <a href="/exercise/{{ exercise.item.id }}" class="routine_exercise {{ exercise.item.id }}" target="_blank">
+            <div class="routine_exercise_item">
+                <img class="routine_exercise_item_imagen" src="{{ exercise.item.logo }}" alt="logo_ejercicio">
+                <h4 class="routine_exercise_item_nombre">{{ exercise.item.name }}</h4>
+            </div>
+            <div class="routine_exercise_description">
+                <h5 class="routine_exercise_description_serie">Series: {{ exercise.series }}</h5>
+                <h5 class="routine_exercise_description_repeteicion">Repeticiones: {{ exercise.cycles }}</h5>
+                <h5 class="routine_exercise_description_descanso">Descanso (Minutos): {{ exercise.rest }}</h5>
+            </div>
+        </a>
+        {% endfor %}
     </div>
 
     <script src="{% static '/assets/js/scriptPaginaPrincipal.js' %}"></script>

@@ -1,8 +1,11 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 # Create your models here.
+
+# User model
 
 class UserManager(BaseUserManager):
     
@@ -52,6 +55,8 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+    
+# Exercise model
 
 class Exercise(models.Model):
     
@@ -78,3 +83,53 @@ class Exercise(models.Model):
     def __str__(self):
         string = self.name + ' (' + str(self.id) + ')' 
         return string
+
+
+# Feedback model
+
+class FeedbackManager(models.Manager):
+
+    def create_feedback(self, user_id, feedback_type, content):
+        feedback = self.create(user_id = user_id, feedback_type = feedback_type, content = content)
+        feedback.save(using=self._db)
+        return feedback
+
+class Feedback(models.Model):
+
+    user_id = models.IntegerField(null = False)
+    feedback_id = models.AutoField(primary_key=True, auto_created=True)
+    feedback_type = models.CharField(max_length=11)
+    content = models.CharField(max_length=1000)
+    state = models.BooleanField(default = False)
+
+    on_delete = models.CASCADE
+
+    objects = FeedbackManager()
+
+# Routine model
+    
+class RoutineManager(models.Manager):
+
+    def create_routine(self,user_id, exercises, name, description, logo):
+        routine = self.model(
+            name= name,
+            user_id = user_id,
+            exercises = exercises,
+            description = description,
+            logo = logo
+        )
+        routine.save(using=self.db)
+        return routine
+
+
+class Routine(models.Model):
+
+    id = models.AutoField(primary_key=True, auto_created = True)
+    name = models.CharField(unique=True)
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    exercises = ArrayField(models.IntegerField(null = False))
+    description = ArrayField(models.CharField(null = False))
+    logo = models.CharField(unique=True)
+
+    objects = RoutineManager()
+

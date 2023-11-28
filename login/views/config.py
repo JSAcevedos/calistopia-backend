@@ -9,16 +9,24 @@ from ..tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.contrib import messages
+from ..models import Exercise
+from ..models import Routine
 from ..models import User
 
 @login_required
 def user_view(request):
-    return render(request, "vista_user.html")
+    user = request.user
+    routines = Routine.objects.filter(user_id=user)
+
+    return render(request, "vista_user.html", {
+        'routines':routines,
+        'username':request.user
+    })
 
 @login_required
 def config(request):
     messages.info(request,"Para efectuar los cambios debes ingresar tu contraseña.")
-    return render(request, "data_modify.html")
+    return render(request, "config/data_modify.html")
 
 @login_required
 def change_config(request, id):
