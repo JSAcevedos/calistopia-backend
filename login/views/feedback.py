@@ -30,7 +30,7 @@ def user_feedback(request):
 def feedback_content(request, fid):
     try:
         feedback = Feedback.objects.get(feedback_id = fid)
-        if feedback.user_id == request.user.id:
+        if feedback.user_id == request.user.id  or request.user.is_admin:
             context = {"feedback": feedback}
             return render(request, "feedback/feedback_content.html", context = context)
         else:
