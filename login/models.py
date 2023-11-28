@@ -151,7 +151,7 @@ class History(models.Model):
 
     id = models.AutoField(primary_key=True, auto_created = True)
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    action = models.CharField(unique=True)
+    action = models.CharField()
     date = DateTimeField(auto_now_add=True)
 
     objects = HistoryManager()
