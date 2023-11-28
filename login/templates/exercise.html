@@ -27,17 +27,7 @@
                 <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
             </a>
 
-            {% if user.is_authenticated %}
-            <a class="enlaceIngresar" href="/logout/">
-                <p>Perfil</p>
-            </a>
-            {% else %}
-            <a class="enlaceIngresar" href="/login/">
-                <p>Ingresar</p>
-            </a>
-            {% endif %}
-
-            <a class="enlaceIngresar" href="javascript: history.go(-1)">
+            <a class="enlaceIngresar" href="/">
                 <p>Volver</p>
             </a>
         </div>
@@ -48,13 +38,13 @@
 
         <nav class="menuLateral__navegacion">
             <a href="/about/" class="navegacion__enlace">Nosotros</a>
+            <a href="./feedback" class="navegacion__enlace">PQRS</a>
             {% if user.is_authenticated %}
             <a href="/logout/" class="navegacion__enlace">Cerrar Sesión</a>
             {% endif %}
         </nav>
 
     </aside>
-
     <div class="exercise">
         <iframe class="exercise__video" src="{{ exercise.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <h1>

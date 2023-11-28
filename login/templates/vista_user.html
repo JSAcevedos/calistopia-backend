@@ -29,7 +29,7 @@
                 <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
             </a>
 
-            <a class="enlaceIngresar" href="javascript: history.go(-1)">
+            <a class="enlaceIngresar" href="/">
                 <p>Volver</p>
             </a>
 
@@ -41,6 +41,7 @@
 
         <nav class="menuLateral__navegacion">
             <a href="/about/" class="navegacion__enlace">Nosotros</a>
+            <a href="./feedback" class="navegacion__enlace">PQRS</a>
             {% if user.is_authenticated %}
             <a href="/logout/" class="navegacion__enlace">Cerrar Sesión</a>
             {% endif %}

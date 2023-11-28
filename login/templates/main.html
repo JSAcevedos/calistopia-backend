@@ -29,7 +29,7 @@
 
             {% if user.is_authenticated %}
             <a class="enlaceIngresar" href="/user/">
-                <p>Perfil</p>
+                <p>Hola {{user}}, <u>Perfil</u></p>
             </a>
             {% else %}
             <a class="enlaceIngresar" href="/login/">
