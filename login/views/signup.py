@@ -9,6 +9,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.contrib import messages
+from ..models import History
 from ..models import User
 
 
@@ -25,6 +26,7 @@ def signup(request):
                     email.lower()
                 )
                 activateEmail(request, user, user.email)
+                History.objects.create_history(user,"Cuenta Creada")
                 messages.success(request, '¡Cuenta creada! ¡Porfavor revisa tu correo para activar tu cuenta de Calistopia!') 
                 return redirect("login")
             else:
@@ -71,7 +73,8 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.active = True
         user.save()
-        messages.success(request, '¡Cuenta activada!')
+        History.objects.create_history(user,"Cuenta Activada")
+        messages.success(request, '¡Cuenta activada, ya puede ingresar!')
         return redirect("login")
     else:
         if not user.active:

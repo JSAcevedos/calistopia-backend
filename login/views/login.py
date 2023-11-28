@@ -4,6 +4,7 @@ from django.contrib.auth import login as cookie, logout as remove_cookie
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
+from ..models import History
 from ..models import User
 import datetime
 
@@ -36,6 +37,7 @@ def login(request):
                         user.todayLoginAttempts = 0
                         user.save()
                         cookie(request, user)
+                        History.objects.create_history(request.user,"Login Exitoso")
                         return redirect("main")
 
                     else:
@@ -48,8 +50,10 @@ def login(request):
                     userTodayLoginAttempts = User.objects.get(username=userName).todayLoginAttempts
                     messages.info(request, f"La contraseña ingresada no es correcta para {userName}.")
                     messages.info(request, f"Qeuedan {10 - userTodayLoginAttempts} intentos.")
+                    History.objects.create_history(request.user,"Login Fallido")
                     return redirect("login")
             else:
+                    History.objects.create_history(request.user,"Login Fallido")
                     messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
                     return redirect("login")
         elif User.objects.filter(email = userName.lower()).exists():
@@ -79,8 +83,10 @@ def login(request):
                     userTodayLoginAttempts = User.objects.get(email=userName.lower()).todayLoginAttempts
                     messages.info(request, f"La contraseña ingresada no es correcta para {userName.lower()}.")
                     messages.info(request, f"Quedan {10 - userTodayLoginAttempts} intentos.")
+                    History.objects.create_history(request.user,"Login Fallido")
                     return redirect("login")
             else:
+                History.objects.create_history(request.user,"Login Fallido")
                 messages.error(request, f"Lo sentimos. No tienes más intentos disponibles hoy.")
                 return redirect("login")
         else:

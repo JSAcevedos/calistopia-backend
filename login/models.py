@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.postgres.fields import ArrayField
+from django.db.models import DateTimeField
 from django.db import models
 
 # Create your models here.
@@ -133,3 +134,24 @@ class Routine(models.Model):
 
     objects = RoutineManager()
 
+# History model
+    
+class HistoryManager(models.Manager):
+
+    def create_history(self,user_id, action):
+        history = self.model(
+            user_id = user_id,
+            action = action,
+        )
+        history.save(using=self.db)
+        return history
+
+
+class History(models.Model):
+
+    id = models.AutoField(primary_key=True, auto_created = True)
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    action = models.CharField(unique=True)
+    date = DateTimeField(auto_now_add=True)
+
+    objects = HistoryManager()

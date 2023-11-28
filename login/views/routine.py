@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from ..models import Exercise
 from ..models import Routine
+from ..models import History
 
 @login_required
 def routine(request, routine_id):
@@ -89,6 +90,7 @@ def modify_routine(request, routine_id):
         new_routine.exercises = exercises
         new_routine.description = description
         new_routine.save()
+        History.objects.create_history(request.user,"Rutina modificada")
         return redirect(f"/routines/{routine_id}/")
 
 @login_required
@@ -112,6 +114,8 @@ def create_routine(request):
         logo = Exercise.objects.get(name = exercises_names[0]).logo
 
         Routine.objects.create_routine(user_id, exercises, title, description, logo)
+
+        History.objects.create_history(request.user,"Rutina creada")
 
         return render(request, "routine/create_routine.html", {
             'catalogue' : catalogue

@@ -9,7 +9,7 @@ from ..tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.contrib import messages
-from ..models import Exercise
+from ..models import History
 from ..models import Routine
 from ..models import User
 
@@ -17,10 +17,12 @@ from ..models import User
 def user_view(request):
     user = request.user
     routines = Routine.objects.filter(user_id=user)
+    history = History.objects.filter(user_id=request.user)
 
     return render(request, "vista_user.html", {
         'routines':routines,
-        'username':request.user
+        'username':request.user,
+        'history' : history
     })
 
 @login_required

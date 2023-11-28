@@ -59,14 +59,20 @@
             <div class="scroll-div">
                 <div class="scroll">
                     <ul>
-                    <!--{% if historial %}
-                        {% for texto in historial %}
-                            <li>{{ texto }}</li>
+                    {% if history %}
+                        {% for register in history %}
+                        <li>
+                            <p>
+                                {{ register.action }}
+                            </p>
+                            <p>
+                                {{ register.date }}
+                            </p>
+                        </li>
                         {% endfor %}
                     {% else %}
                         <li>No hay historial disponible</li>
-                    {% endif %} -->
-
+                    {% endif %}
                     </ul>
                 </div>
             </div>
