@@ -29,15 +29,10 @@
                 <h1 class="logo__nombre no-margin centrar-texto">CALISTOPÍA</h1>
             </a>
 
-            {% if user.is_authenticated %}
-            <a class="enlaceIngresar" href="/">
-                <p>Inicio</p>
+            <a class="enlaceIngresar" href="javascript: history.go(-1)">
+                <p>Volver</p>
             </a>
-            {% else %}
-            <a class="enlaceIngresar" href="/login/">
-                <p>Ingresar</p>
-            </a>
-            {% endif %}
+
         </div>
 
     </header>
