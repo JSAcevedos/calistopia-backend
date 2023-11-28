@@ -98,6 +98,7 @@ def login(request):
     return render(request, 'login_register/login.html')
 
 def logout(request):
+    History.objects.create_history(request.user,"Logout Exitoso")
     remove_cookie(request)
     return redirect("login")
 
