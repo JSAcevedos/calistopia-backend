@@ -18,5 +18,6 @@ urlpatterns = [
     path('feedback/', views.feedback, name='feedback'),
     path('user_feedback/', views.user_feedback, name='user_feedback'),
     path('user_feedback/<int:fid>/', views.feedback_content, name='feedback_content'),
-    path('user_feedback/<int:fid>/delete/', views.delete_feedback, name='feedback_content'),
+    path('user_feedback/<int:fid>/delete/', views.delete_feedback, name='feedback_content_delete'),
+    path('user_feedback/<int:fid>/actualice_feedback/', views.actualice_feedback, name='feedback_content_actualice'),
 ]
