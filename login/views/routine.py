@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.http import Http404
 from ..models import Exercise
 from ..models import Routine
 from ..models import History
@@ -119,5 +120,26 @@ def create_routine(request):
 
         return render(request, "routine/create_routine.html", {
             'catalogue' : catalogue
+        })
+
+@login_required
+def delete_routine(request, routine_id):
+
+    if request.method == "GET":
+        return Http404
+    else:
+        
+        routine = Routine.objects.get(id=routine_id)
+        routine.delete()
+
+        user = request.user
+        History.objects.create_history(user,"Rutina eliminada")
+        routines = Routine.objects.filter(user_id=user)
+        history = History.objects.filter(user_id=user)
+
+        return render(request, "vista_user.html", {
+            'routines': routines,
+            'username': user,
+            'history' : history
         })
                 

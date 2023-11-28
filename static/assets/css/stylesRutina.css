@@ -84,3 +84,25 @@
     right: 4rem;
     color: #000000;
 }
+
+.form_delete_routine{
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+.form_delete_routine button{
+    background-color: #b00;
+    border-radius: 4px;
+    width: 310px;
+    padding: 1rem;
+    cursor: pointer;
+    border: none;
+}
+
+.form_delete_routine button:hover{
+    background-color: #b33;
+    border-radius: 4px;
+    width: 310px;
+    padding: 1rem;
+    border: none;
+}

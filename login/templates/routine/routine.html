@@ -64,6 +64,10 @@
 
         <input class="routine_title" value="{{ title }}" readonly />
         <a class="routine_modify_button {{ routine_id }}" href="/routine/modify/{{ routine_id }}">Modificar rutina</a>
+        <form action="/routine/delete/{{ routine_id }}/" method="POST" class="form_delete_routine">
+            {% csrf_token %}
+            <button>Eliminar rutina</button>
+        </form>
         {% for exercise in exercises %}
         <a href="/exercise/{{ exercise.item.id }}" class="routine_exercise {{ exercise.item.id }}" target="_blank">
             <div class="routine_exercise_item">
